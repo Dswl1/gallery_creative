@@ -1,0 +1,20 @@
+<header
+  class="flex justify-between items-center bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)] backdrop-blur-md px-6 py-4 border-b border-white/30">
+
+  <!-- Left: Logo -->
+  <div class="flex items-center">
+    <button id="menuBtn" class="sm:hidden mr-3 text-white text-xl">
+  <i class="fa fa-bars"></i>
+</button>
+    <img src="{{ url_for('static', filename='assets/logo.png') }}" class="w-10" alt="">
+    <h1 class="text-xl p-2 font-semibold">Dashboard</h1>
+  </div>
+
+  <!-- Right: User -->
+  {% if 'username' in session %}
+  <span class="font-medium flex items-center space-x-2 cursor-pointer">
+    <!-- <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full border" alt="profile"> -->
+    <span class="font-medium"><i class="fa fa-user mx-2"></i>{{ session['username'] }}</span>
+  </span>
+  {% endif %}
+</header>

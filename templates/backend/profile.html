@@ -1,0 +1,47 @@
+{% extends 'backend/index.html' %}
+{% block content %}
+<div class="bg-gray-200 p-6 rounded-lg shadow-md mx-auto w-full">
+  <!-- Foto Profil -->
+  <div class="flex justify-center mb-6">
+    <img src="https://via.placeholder.com/100" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-gray-300">
+  </div>
+
+  <h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Profile Details</h2>
+
+  <!-- Data Profil -->
+  <div class="space-y-3">
+    <div>
+      <label class="block text-gray-600 text-sm mb-1">Nama</label>
+      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Asep Ganteng</div>
+    </div>
+
+    <div>
+      <label class="block text-gray-600 text-sm mb-1">Email</label>
+      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Asepgurun@gmail.com</div>
+    </div>
+
+    <div>
+      <label class="block text-gray-600 text-sm mb-1">No HP</label>
+      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">081234567890</div>
+    </div>
+
+    <div>
+      <label class="block text-gray-600 text-sm mb-1">Username</label>
+      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">asep_uhuy</div>
+    </div>
+
+    <div>
+      <label class="block text-gray-600 text-sm mb-1">Password</label>
+      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">********</div>
+    </div>
+  </div>
+
+  <!-- Tombol Aksi -->
+  <div class="mt-6 flex justify-center space-x-3">
+    <button class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Edit</button>
+    <button class="bg-red-500 text-white py-2 px-6 rounded hover:bg-red-600 transition">Delete</button>
+  </div>
+</div>
+
+
+{% endblock %}
