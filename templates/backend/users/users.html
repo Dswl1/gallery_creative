@@ -8,7 +8,7 @@
         class="bg-white/80 border border-stone-800/40 px-3 py-2 rounded-md shadow-sm w-full max-w-xs focus:ring focus:ring-blue-200" />
 </div>
 <div class="flex justify-end">
-    <a href="#" class="bg-blue-500 p-2 mb-2 rounded-md">Tambah User</i></a>
+    <a href="{{ url_for('create_users' ) }}" class="bg-blue-500 p-2 mb-2 rounded-md">Tambah User</i></a>
 </div>
 
 <!-- TABLE WRAPPER -->
@@ -35,15 +35,21 @@
 
                 <!-- CRUD -->
                 <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                        <i class="fa fa-eye text-sm"></i>
-                    </button>
-                    <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                        <i class="fa fa-pen text-sm"></i>
-                    </button>
-                    <button class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                        <i class="fa fa-trash text-sm"></i>
-                    </button>
+                    <a href="{{ url_for('detail_users' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
+                            <i class="fa fa-eye text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="{{ url_for('update_users' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
+                            <i class="fa fa-pen text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                            <i class="fa fa-trash text-sm"></i>
+                        </button>
+                    </a>
                 </td>
 
             </tr>

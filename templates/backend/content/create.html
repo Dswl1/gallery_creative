@@ -1,0 +1,45 @@
+{% extends 'backend/index.html' %}
+{% block content %}
+<!-- Foto Profil -->
+<h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Create Content</h2>
+
+
+<!-- Form Inputan -->
+<div class="bg-[#c3e6ff]/60 backdrop-blur-md p-4 rounded-lg shadow-xl overflow-x-auto w-full">
+
+    <form action="/create-content" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <div>
+            <label for="karya" class="block text-gray-600 text-sm mb-1">Gambar Karya</label>
+            <input type="file" id="gambar_karya" name="gambar_karya" accept="image/*"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+            <label for="judul" class="block text-gray-600 text-sm mb-1">Judul Karya</label>
+            <input type="text" id="judul" name="judul"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label for="judul" class="block text-gray-600 text-sm mb-1">Kategori Karya</label>
+            <select id="kategori" name="kategori" class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="abstrak">Abstrak</option>
+                <option value="nature">Nature</option>
+                <option value="kaligrafi">Kaligrafi</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="deskripsi" class="block text-gray-600 text-sm mb-1">Deskripsi Karya</label>
+            <textarea type="deskripsi" id="deskripsi" name="deskripsi"
+                class="w-full h-64 p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </textarea>
+        </div>
+
+        <!-- Tombol Aksi -->
+        <div class="mt-6 flex justify-end space-x-3">
+            <button type="submit"
+                class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Tambah</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

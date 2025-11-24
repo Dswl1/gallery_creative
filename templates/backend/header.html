@@ -4,11 +4,13 @@
   <!-- Left: Logo -->
   <div class="flex items-center">
     <button id="menuBtn" class="sm:hidden mr-3 text-white text-xl">
-  <i class="fa fa-bars"></i>
-</button>
+      <i class="fa fa-bars"></i>
+    </button>
     <img src="{{ url_for('static', filename='assets/logo.png') }}" class="w-10" alt="">
-    <h1 class="text-xl p-2 font-semibold">Dashboard</h1>
-  </div>
+    <a href="{{ url_for('index' ) }}">
+      <h1 class="text-xl p-2 font-semibold">Dashboard</h1>
+    </a>
+    </div>
 
   <!-- Right: User -->
   {% if 'username' in session %}

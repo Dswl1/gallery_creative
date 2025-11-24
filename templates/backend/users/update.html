@@ -1,0 +1,56 @@
+{% extends 'backend/index.html' %}
+{% block content %}
+
+<!-- Foto Profil -->
+<div class="bg-[#c3e6ff]/60 backdrop-blur-md p-4 rounded-lg shadow-xl overflow-x-auto w-full">
+    <div class="flex justify-center mb-6">
+        <img src="{{ url_for('static', filename='assets/profile.png') }}" alt="Profile Picture"
+            class="w-40 h-40 rounded-full border-4 border-gray-300">
+    </div>
+    <h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Edit Profile</h2>
+    <!-- Form Inputan -->
+    <form action="/update-profile" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <div>
+            <label for="foto" class="block text-gray-600 text-sm mb-1">Profil</label>
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+            <label for="nama" class="block text-gray-600 text-sm mb-1">Nama</label>
+            <input type="text" id="nama" name="nama" value="Asep Ganteng"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label for="email" class="block text-gray-600 text-sm mb-1">Email</label>
+            <input type="email" id="email" name="email" value="Asepgurun@gmail.com"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label for="no_hp" class="block text-gray-600 text-sm mb-1">No HP</label>
+            <input type="tel" id="no_hp" name="no_hp" value="081234567890"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label for="username" class="block text-gray-600 text-sm mb-1">Username</label>
+            <input type="text" id="username" name="username" value="asep_uhuy"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label for="password" class="block text-gray-600 text-sm mb-1">Password</label>
+            <input type="password" id="password" name="password" placeholder="Masukkan password baru"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- Tombol Aksi -->
+        <div class="mt-6 flex justify-center space-x-3">
+            <button type="submit"
+                class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Update</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

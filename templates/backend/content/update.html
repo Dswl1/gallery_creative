@@ -1,0 +1,55 @@
+{% extends 'backend/index.html' %}
+{% block content %}
+<div class="bg-[#c3e6ff]/60 backdrop-blur-md p-4 rounded-lg shadow-xl overflow-x-auto w-full">
+    <div class="flex justify-center mb-6">
+        <img src="{{ url_for('static', filename='assets/content1.jpg') }}" alt="Profile Picture" class="w-64 h-64 rounded border-4 border-gray-300">
+      </div>
+    <h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Update Content</h2>
+    
+    <form action="/create-content" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <div>
+            <label for="karya" class="block text-gray-600 text-sm mb-1">Gambar Karya</label>
+            <input type="file" id="gambar_karya" name="gambar_karya" accept="image/*"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+            <label for="judul" class="block text-gray-600 text-sm mb-1">Judul Karya</label>
+            <input type="text" id="judul" name="judul" value="lorem Ipsum"
+                class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label for="judul" class="block text-gray-600 text-sm mb-1">Kategori Karya</label>
+            <select id="kategori" name="kategori" class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="abstrak">Abstrak</option>
+                <option value="nature">Nature</option>
+                <option value="kaligrafi">Kaligrafi</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="deskripsi" class="block text-gray-600 text-sm mb-1">Deskripsi Karya</label>
+            <textarea type="deskripsi" id="deskripsi" name="deskripsi"
+                class="w-full h-64 p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                 Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text
+                ever
+                since the 1500s,
+                when an unknown printer took a galley of type and
+                scrambled
+                it to make a type
+                desktop publishing software like Aldus PageMaker
+                including
+                versions of Lorem Ipsum.
+            </textarea>
+        </div>
+
+        <!-- Tombol Aksi -->
+        <div class="mt-6 flex justify-end space-x-3">
+            <button type="submit"
+                class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
