@@ -10,18 +10,27 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    USERNAME = "ekall"
-    PASSWORD = "blobanjeng"
-    
+    ADMIN_USERNAME = "ekall"
+    ADMIN_PASSWORD = "blobanjeng"
+
+    USER_USERNAME = "user"
+    USER_PASSWORD = "password"
+
     message = ""
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
 
-        if username == USERNAME and password == PASSWORD:
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             session['username'] = username
-            # message = "✅ Anda berhasil login!"
-            return redirect(url_for('index'))
+            session['role'] = "admin"
+            return redirect(url_for('dashboard'))
+
+        elif username == USER_USERNAME and password == USER_PASSWORD:
+            session['username'] = username
+            session['role'] = "user"
+            return redirect(url_for('dashboard'))
+
         else:
             message = "❌ Username atau password salah!"
 
@@ -38,36 +47,61 @@ def detail():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('backend/profile.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/profile.html', role=session['role'])
 
 @app.route('/dashboard/users')
 def dashboard_users():
-    return render_template('backend/users/users.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/users/users.html', role=session['role'])
+    
 
 # CRUD USERS
 @app.route('/dashboard/users/create_user')
 def create_users():
-    return render_template('backend/users/create.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/users/create.html', role=session['role'])
+
 @app.route('/dashboard/users/update_user')
 def update_users():
-    return render_template('backend/users/update.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/users/update.html', role=session['role'])
+
 @app.route('/dashboard/users/detail_user')
 def detail_users():
-    return render_template('backend/users/detail.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/users/detail.html', role=session['role'])
 
 # CRUD CONTENT
 @app.route('/dashboard/content')
 def dashboard_content():
-    return render_template('backend/content/content.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/content/content.html', role=session['role'])
+
 @app.route('/dashboard/content/create_content')
 def create_content():
-    return render_template('backend/content/create.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/content/create.html', role=session['role'])
+
 @app.route('/dashboard/content/update_content')
 def update_content():
-    return render_template('backend/content/update.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/content/update.html', role=session['role'])
+
 @app.route('/dashboard/content/detail_content')
 def detail_content():
-    return render_template('backend/content/detail.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/content/detail.html', role=session['role'])
+
 
 if __name__ == '__main__':
     app.run(debug=True)

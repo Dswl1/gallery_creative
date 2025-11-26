@@ -38,7 +38,9 @@
 
   <!-- Tombol Aksi -->
   <div class="mt-6 flex justify-between space-x-3">
-    <button class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Edit</button>
+    <a href="{{ url_for('update_users' ) }}">
+      <button class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Edit</button>
+    </a>
     <button class="bg-red-500 text-white py-2 px-6 rounded hover:bg-red-600 transition">Delete</button>
   </div>
 </div>
