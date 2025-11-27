@@ -11,7 +11,7 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     ADMIN_USERNAME = "ekall"
-    ADMIN_PASSWORD = "blobanjeng"
+    ADMIN_PASSWORD = "admin123"
 
     USER_USERNAME = "user"
     USER_PASSWORD = "password"
@@ -83,6 +83,12 @@ def dashboard_content():
     if 'username' not in session:
         return redirect(url_for('login'))
     return render_template('backend/content/content.html', role=session['role'])
+
+@app.route('/dashboard/content/all_content')
+def dashboard_adm_content():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('backend/content/admin_content.html', role=session['role'])
 
 @app.route('/dashboard/content/create_content')
 def create_content():
