@@ -95,53 +95,56 @@
                 class="flex-1 outline-none text-gray-700 bg-transparent placeholder-gray-400">
         </div>
         <!-- Menu navigasi -->
-        <a href="{{ url_for('index' ) }}" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
-            <i class="fa-solid fa-house"></i>
-            Beranda
-        </a>
-        <a href="#" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
-            <i class="fa-solid fa-circle-info"></i>
-            Karya
-        </a>
-        <div class="group relative">
-            <a href="#"
-                class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
-                <i class="fa-solid fa-list mr-2 text-black"></i>
-                Kategori
-                <i class="fa-solid fa-chevron-down ml-1 text-black text-sm"></i>
+        <div class="mb-2">
+            <a href="{{ url_for('index' ) }}"
+                class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
+                <i class="fa-solid fa-house"></i>
+                Beranda
             </a>
-            <!-- Dropdown list -->
-            <ul
-                class="absolute left-0 mt-2 bg-white rounded-lg shadow-md text-gray-700 w-40 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 1</a>
-                </li>
-                <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 2</a>
-                </li>
-                <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 3</a>
-                </li>
-            </ul>
-        </div>
-        <a href="#" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
-            <i class="fa-solid fa-envelope"></i>
-            Tim Pembuat
-        </a>
-        <!-- Login button -->
+            <a href="#" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
+                <i class="fa-solid fa-circle-info"></i>
+                Karya
+            </a>
+            <div class="group relative">
+                <a href="#"
+                    class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
+                    <i class="fa-solid fa-list mr-2 text-black"></i>
+                    Kategori
+                    <i class="fa-solid fa-chevron-down ml-1 text-black text-sm"></i>
+                </a>
+                <!-- Dropdown list -->
+                <ul
+                    class="absolute left-0 mt-2 bg-white rounded-lg shadow-md text-gray-700 w-40 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 1</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 2</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 3</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="#" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
+                <i class="fa-solid fa-envelope"></i>
+                Tim Pembuat
+            </a>
+            <!-- Login button -->
 
-        {% if 'username' in session %}
-        <a href="{{ url_for('dashboard' ) }}"
-            class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
-            <i class="fa-solid fa-user mr-2 text-black"></i>
-            {{ session['username'] }}
-        </a>
-        {% else %}
-        <a href="{{ url_for('login' ) }}"
-            class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
-            <i class="fa-solid fa-right-to-bracket mr-2 text-black"></i>
-            Login
-        </a>
-        {% endif %}
+            {% if 'username' in session %}
+            <a href="{{ url_for('dashboard' ) }}"
+                class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
+                <i class="fa-solid fa-user mr-2 text-black"></i>
+                {{ session['username'] }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('login' ) }}"
+                class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
+                <i class="fa-solid fa-right-to-bracket mr-2 text-black"></i>
+                Login
+            </a>
+            {% endif %}
+        </div>
     </div>
 </div>

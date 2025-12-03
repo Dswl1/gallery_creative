@@ -50,13 +50,18 @@
                 <i class="fa-solid fa-right-to-bracket mr-2"></i> Masuk
             </button>
         </form>
-
-        {% if message %}
+        
         <!-- Garis pemisah -->
         <div class="flex items-center my-6">
             <hr class="flex-1 border-gray-300">
             <span class="mx-3 text-gray-500 text-sm"></span>
         </div>
+        
+        <div class="flex justify-center ">
+            <h1 class="mr-2">Belum punya akun?</h1>
+            <a href="{{ url_for('register') }}" class="text-blue-700 hover:underline offset-2">Buat akun disini</a>
+        </div>
+        {% if message %}
 
         <!-- Link daftar -->
         <p class="text-center text-sm text-gray-600">
