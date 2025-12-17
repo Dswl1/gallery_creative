@@ -2,49 +2,28 @@
 {% block content %}
 <h2 class="text-2xl font-semibold text-center mb-3">Data Konten</h2>
 
-<!-- SEARCH (UI Only) -->
-<div class="mb-4 flex justify-end">
-    <input type="text" placeholder="Cari data..."
-        class="bg-white/80 border border-stone-800/40 px-3 py-2 rounded-md shadow-sm w-full max-w-xs focus:ring focus:ring-blue-200" />
-</div>
-<div class="flex justify-end">
-    <a href="{{ url_for('create_content' ) }}" class="bg-blue-500 p-2 mb-2 rounded-md">Upload Konten</i></a>
-</div>
-
 <!-- TABLE WRAPPER -->
-<div class="bg-[#c3e6ff]/60 backdrop-blur-md p-4 rounded-lg shadow-xl overflow-x-auto w-full">
-
-    <table class="min-w-full table-auto text-xs sm:text-sm border-separate border-spacing-y-1">
-        <thead class="border-b border-gray-700">
-            <tr class="text-gray-700 font-semibold text-center">
-                <th class="p-3 w-10">No.</th>
-                <th class="p-3 w-20">Thumbnail</th>
-                <th class="p-3 text-left max-w-[120px] sm:max-w-none">Judul Karya</th>
-                <th class="p-3 text-left hidden sm:table-cell">Publisher</th>
-                <th class="p-3 text-left hidden sm:table-cell">Waktu Upload</th>
-                <th class="p-3 w-24">Aksi</th>
+<div class="datatable-container">
+    <table id="dataTables" class="datatable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Thumbnail</th>
+                <th>Judul Karya</th>
+                <th>Publisher</th>
+                <th>Waktu Dibuat</th>
+                <th>Aksi</th>
             </tr>
         </thead>
-
-        <tbody class="text-gray-700">
-            <tr class="border-b border-gray-200 hover:bg-blue-100/30 transition">
-
-                <td class="p-3 text-center">1.</td>
-
-                <!-- Thumbnail -->
-                <td class="p-3 text-center">
-                    <img src="{{ url_for('static', filename='assets/content1.jpg') }}"
-                        class="w-10 h-10 sm:w-14 sm:h-14 object-cover rounded-md shadow-md mx-auto">
+        <tbody>
+            <tr>
+                <td class="text-center">1</td>
+                <td class="text-center">
+                    <img src="{{ url_for('static', filename='assets/content8.jpg') }}" onerror="this.src='/static/img/placeholder.png'" class="dt-thumb" alt="Thumbnail">
                 </td>
-
-                <!-- Judul -->
-                <td class="p-3 truncate max-w-[120px] sm:max-w-none">Judul Karya</td>
-
-                <!-- Hidden di HP -->
-                <td class="p-3 truncate hidden sm:table-cell">Publisher</td>
-                <td class="p-3 truncate hidden sm:table-cell">12-10-2025</td>
-
-                <!-- CRUD -->
+                <td>judul karya 1</td>
+                <td>lorem</td>
+                <td>12-10-2025</td>
                 <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
                     <a href="{{ url_for('detail_content' ) }}">
                         <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
@@ -57,31 +36,21 @@
                         </button>
                     </a>
                     <a href="#">
-                        <button class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                        <button onclick="deleteBtn()"
+                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
                             <i class="fa fa-trash text-sm"></i>
                         </button>
                     </a>
                 </td>
-
             </tr>
-            <tr class="border-b border-gray-200 hover:bg-blue-100/30 transition">
-
-                <td class="p-3 text-center">1.</td>
-
-                <!-- Thumbnail -->
-                <td class="p-3 text-center">
-                    <img src="{{ url_for('static', filename='assets/content2.jpg') }}"
-                        class="w-10 h-10 sm:w-14 sm:h-14 object-cover rounded-md shadow-md mx-auto">
+            <tr>
+                <td class="text-center">2</td>
+                <td class="text-center">
+                    <img src="{{ url_for('static', filename='assets/content3.jpg') }}" onerror="this.src='/static/img/placeholder.png'" class="dt-thumb" alt="Thumbnail">
                 </td>
-
-                <!-- Judul -->
-                <td class="p-3 truncate max-w-[120px] sm:max-w-none">Judul Karya</td>
-
-                <!-- Hidden di HP -->
-                <td class="p-3 truncate hidden sm:table-cell">Publisher</td>
-                <td class="p-3 truncate hidden sm:table-cell">12-10-2025</td>
-
-                <!-- CRUD -->
+                <td>judul karya 2</td>
+                <td>ipsum</td>
+                <td>12-10-2025</td>
                 <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
                     <a href="{{ url_for('detail_content' ) }}">
                         <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
@@ -94,31 +63,21 @@
                         </button>
                     </a>
                     <a href="#">
-                        <button class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                        <button onclick="deleteBtn()"
+                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
                             <i class="fa fa-trash text-sm"></i>
                         </button>
                     </a>
                 </td>
-
             </tr>
-            <tr class="border-b border-gray-200 hover:bg-blue-100/30 transition">
-
-                <td class="p-3 text-center">1.</td>
-
-                <!-- Thumbnail -->
-                <td class="p-3 text-center">
-                    <img src="{{ url_for('static', filename='assets/content3.jpg') }}"
-                        class="w-10 h-10 sm:w-14 sm:h-14 object-cover rounded-md shadow-md mx-auto">
+            <tr>
+                <td class="text-center">3</td>
+                <td class="text-center">
+                    <img src="{{ url_for('static', filename='assets/content7.jpg') }}" onerror="this.src='/static/img/placeholder.png'" class="dt-thumb" alt="Thumbnail">
                 </td>
-
-                <!-- Judul -->
-                <td class="p-3 truncate max-w-[120px] sm:max-w-none">Judul Karya</td>
-
-                <!-- Hidden di HP -->
-                <td class="p-3 truncate hidden sm:table-cell">Publisher</td>
-                <td class="p-3 truncate hidden sm:table-cell">12-10-2025</td>
-
-                <!-- CRUD -->
+                <td>judul karya 3</td>
+                <td>lorem</td>
+                <td>12-10-2025</td>
                 <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
                     <a href="{{ url_for('detail_content' ) }}">
                         <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
@@ -131,17 +90,95 @@
                         </button>
                     </a>
                     <a href="#">
-                        <button class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                        <button onclick="deleteBtn()"
+                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
                             <i class="fa fa-trash text-sm"></i>
                         </button>
                     </a>
                 </td>
-
+            </tr>
+            <tr>
+                <td class="text-center">4</td>
+                <td class="text-center">
+                    <img src="{{ url_for('static', filename='assets/content1.jpg') }}" onerror="this.src='/static/img/placeholder.png'" class="dt-thumb" alt="Thumbnail">
+                </td>
+                <td>judul karya 4</td>
+                <td>lorem</td>
+                <td>12-10-2025</td>
+                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
+                    <a href="{{ url_for('detail_content' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
+                            <i class="fa fa-eye text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="{{ url_for('update_content' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
+                            <i class="fa fa-pen text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button onclick="deleteBtn()"
+                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                            <i class="fa fa-trash text-sm"></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">5</td>
+                <td class="text-center">
+                    <img src="{{ url_for('static', filename='assets/content5.jpg') }}" onerror="this.src='/static/img/placeholder.png'" class="dt-thumb" alt="Thumbnail">
+                </td>
+                <td>judul karya 5</td>
+                <td>impsum</td>
+                <td>12-10-2025</td>
+                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
+                    <a href="{{ url_for('detail_content' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
+                            <i class="fa fa-eye text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="{{ url_for('update_content' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
+                            <i class="fa fa-pen text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button onclick="deleteBtn()"
+                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                            <i class="fa fa-trash text-sm"></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">6</td>
+                <td class="text-center">
+                    <img src="{{ url_for('static', filename='assets/content6.jpg') }}" onerror="this.src='/static/img/placeholder.png'" class="dt-thumb" alt="Thumbnail">
+                </td>
+                <td>judul karya 6</td>
+                <td>lorem</td>
+                <td>12-10-2025</td>
+                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
+                    <a href="{{ url_for('detail_content' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
+                            <i class="fa fa-eye text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="{{ url_for('update_content' ) }}">
+                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
+                            <i class="fa fa-pen text-sm"></i>
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button onclick="deleteBtn()"
+                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                            <i class="fa fa-trash text-sm"></i>
+                        </button>
+                    </a>
+                </td>
             </tr>
         </tbody>
-
     </table>
-
 </div>
-
 {% endblock %}

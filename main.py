@@ -29,7 +29,7 @@ def login():
         elif username == USER_USERNAME and password == USER_PASSWORD:
             session['username'] = username
             session['role'] = "user"
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('index'))
 
         else:
             message = "❌ Username atau password salah!"

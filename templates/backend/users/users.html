@@ -3,59 +3,78 @@
 <h2 class="text-2xl font-semibold text-center mb-3">Data Users</h2>
 
 <!-- SEARCH -->
-<div class="mb-4 flex justify-end">
+<!-- <div class="mb-4 flex justify-end">
     <input type="text" placeholder="Cari user..."
         class="bg-white/80 border border-stone-800/40 px-3 py-2 rounded-md shadow-sm w-full max-w-xs focus:ring focus:ring-blue-200" />
-</div>
+</div> -->
 <div class="flex justify-end">
-    <a href="{{ url_for('create_users' ) }}" class="bg-blue-500 p-2 mb-2 rounded-md">Tambah User</i></a>
+    <a href="{{ url_for('create_users' ) }}" class="btn bg-blue-500 p-2 mb-2 rounded-md">Tambah User</i></a>
 </div>
 
 <!-- TABLE WRAPPER -->
-<div class="bg-[#c3e6ff]/60 backdrop-blur-md p-4 rounded-lg shadow-xl overflow-x-auto w-full">
-    <table class="min-w-full table-auto text-xs sm:text-sm border-separate border-spacing-y-1">
-        <thead class="border-b border-gray-300">
-            <tr class="text-gray-700 font-semibold text-center">
-                <th class="p-3 w-10">No.</th>
-                <th class="p-3 w-20">Username</th>
-                <th class="p-3 text-left max-w-[120px] sm:max-w-none">Email</th>
-                <th class="p-3 text-left hidden sm:table-cell">Waktu Dibuat</th>
-                <th class="p-3 w-24">Aksi</th>
+<div class="datatable-container">
+    <table id="dataTables" class="datatable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Waktu Dibuat</th>
+                <th>Aksi</th>
             </tr>
         </thead>
-
-        <tbody class="text-gray-700">
-            <tr class="border-b border-gray-200 hover:bg-blue-100/30 transition">
-
-                <td class="p-3 text-center">1.</td>
-                <td class="p-3 truncate max-w-[120px] sm:max-w-none">Lorem Ipsum</td>
-                <td class="p-3 truncate max-w-[120px] sm:max-w-none">Loremipsum@gmail.com</td>
-                <!-- Hidden di HP -->
-                <td class="p-3 truncate hidden sm:table-cell">12-10-2025</td>
-
-                <!-- CRUD -->
+        <tbody>
+            <tr>
+                <td class="text-center">1</td>
+                <td>Lorem Ipsum</td>
+                <td>lorem123</td>
+                <td>lorem@mail.com</td>
+                <td>12-10-2025</td>
                 <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
+                    <a href="{{ url_for('detail_content' ) }}">
                         <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
                             <i class="fa fa-eye text-sm"></i>
                         </button>
                     </a>
-                    <a href="{{ url_for('update_users' ) }}">
+                    <a href="{{ url_for('update_content' ) }}">
                         <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
                             <i class="fa fa-pen text-sm"></i>
                         </button>
                     </a>
                     <a href="#">
-                        <button class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                        <button onclick="deleteBtn()" class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
                             <i class="fa fa-trash text-sm"></i>
                         </button>
                     </a>
                 </td>
-
+            </tr>
+            <tr>
+                <td class="text-center">2</td>
+                <td>Lorem Ipsum</td>
+                <td>lorem123</td>
+                <td>lorem@mail.com</td>
+                <td>12-10-2025</td>
+                <td class="datatable-action flex justify-center gap-2">
+                    <button class="btn-view">👁</button>
+                    <button class="btn-edit">✏️</button>
+                    <button class="btn-delete">🗑</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>arem Ipsum</td>
+                <td>lorem123</td>
+                <td>lorem@mail.com</td>
+                <td>12-10-2025</td>
+                <td class="datatable-action flex justify-center gap-2">
+                    <button class="btn-view">👁</button>
+                    <button class="btn-edit">✏️</button>
+                    <button class="btn-delete">🗑</button>
+                </td>
             </tr>
         </tbody>
-
     </table>
-
 </div>
+
 {% endblock %}

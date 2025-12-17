@@ -9,11 +9,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="icon" href="{{ url_for('static', filename='assets/logo.png') }}" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+  <!-- CUSTOM -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/datatables.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </head>
 
 <body class="overflow-x-hidden bg-white min-h-screen">
@@ -28,25 +32,34 @@
     </main>
   </div>
 
-<div id="overlay"
-  class="fixed inset-0 bg-black/40 hidden sm:hidden z-40"></div>
+  <div id="overlay" class="fixed inset-0 bg-black/40 hidden sm:hidden z-40"></div>
 
-<script>
-  const menuBtn = document.getElementById("menuBtn");
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("overlay");
-
-  menuBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("-translate-x-64");
-    overlay.classList.toggle("hidden");
-  });
-
-  overlay.addEventListener("click", () => {
-    sidebar.classList.add("-translate-x-64");
-    overlay.classList.add("hidden");
-  });
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/datatables.js') }}"></script>
 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.getElementById("menuBtn");
+      const sidebar = document.getElementById("sidebar");
+
+      if (menuBtn && sidebar) {
+        menuBtn.addEventListener("click", () => {
+          sidebar.classList.toggle("-translate-x-full");
+        });
+      }
+    });
+
+    document.querySelectorAll("#sidebar a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 640) {
+          sidebar.classList.add("-translate-x-full");
+        }
+      });
+    });
+
+  </script>
 </body>
+
 </html>

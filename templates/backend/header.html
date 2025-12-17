@@ -2,10 +2,10 @@
   bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)] 
   backdrop-blur-md px-6 py-4 border-b border-white/20 shadow-sm">
 
-  <!-- Left: Logo & Menu Button -->
+  <!-- Left -->
   <div class="flex items-center gap-3">
-    
-    <!-- Sidebar Toggle (Mobile Only) -->
+
+    <!-- Sidebar Toggle (Mobile) -->
     <button id="menuBtn" class="text-white text-xl sm:hidden">
       <i class="fa fa-bars"></i>
     </button>
@@ -14,16 +14,20 @@
     <img src="{{ url_for('static', filename='assets/logo.png') }}" class="w-10" alt="">
 
     <!-- Title -->
-    <a href="{{ url_for('index') }}" class="text-white font-semibold text-lg hover:text-blue-200 transition">
+    <a href="{{ url_for('index') }}"
+       class="text-white font-semibold text-lg hover:text-blue-200 transition">
       Dashboard
     </a>
   </div>
 
-  <!-- Right: User -->
+  <!-- Right -->
   {% if 'username' in session %}
-  <div class="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-xl text-white cursor-pointer hover:bg-white/30 transition">
+  <div
+    class="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-xl text-white">
     <i class="fa fa-user"></i>
     <span class="font-medium">{{ session['username'] }}</span>
   </div>
   {% endif %}
 </header>
+
+

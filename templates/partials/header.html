@@ -1,5 +1,5 @@
 <!-- NAVBAR -->
-<nav
+<nav id="navbar"
     class="fixed top-0 left-0 w-full flex justify-between items-center px-10 py-2 bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)] backdrop-blur-md shadow-md z-50">
 
     <!-- Logo -->
@@ -32,36 +32,29 @@
             <i class="fa-solid fa-users mr-2 text-black"></i>
             Team
         </a>
-        <div class="hidden md:flex items-center space-x-8 relative">
-            <!-- Dropdown Kategori -->
-            <div class="group relative">
-                <!-- Dropdown list -->
-                <button
-                    class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
-                    <i class="fa-solid fa-list mr-2 text-black"></i>
-                    <span id="selected-category">Kategori</span>
-                    <i class="fa-solid fa-chevron-down ml-1 text-black text-sm"></i>
-                </button>
-                <ul id="kategori-list"
-                    class="absolute left-0 mt-2 bg-white rounded-lg shadow-md text-gray-700 w-40 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-sky-200 kategori-item">
-                            Kat 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-sky-200 kategori-item">
-                            Kat 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-sky-200 kategori-item">
-                            Kat 3
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Dropdown Kategori -->
+        <div class="relative">
+            <button id="kategori-btn"
+                class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
+                <i class="fa-solid fa-list mr-2 text-black"></i>
+                <span id="selected-category">Kategori</span>
+                <i class="fa-solid fa-chevron-down ml-1 text-black text-sm"></i>
+            </button>
+
+            <ul id="kategori-dropdown"
+                class="absolute left-0 mt-2 bg-white rounded-lg shadow-md text-gray-700 w-40 hidden">
+                <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-sky-200 kategori-item">Kat 1</a>
+                </li>
+                <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-sky-200 kategori-item">Kat 2</a>
+                </li>
+                <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-sky-200 kategori-item">Kat 3</a>
+                </li>
+            </ul>
         </div>
+
         {% if 'username' in session %}
         <a href="{{ url_for('dashboard' ) }}"
             class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
@@ -86,7 +79,7 @@
 </nav>
 <!-- Mobile Menu -->
 <div id="mobile-menu"
-    class="fixed top-20 left-0 w-full bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)] backdrop-blur-md py-6 z-40 md:hidden">
+    class="hidden fixed top-20 left-0 w-full bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)] backdrop-blur-md py-6 z-40 md:hidden">
     <div class="flex flex-col items-center space-y-4 text-white font-semibold">
         <!-- Search bar -->
         <div class="flex items-center bg-white/90 rounded-full px-4 py-2 w-3/4 shadow-md">
@@ -101,20 +94,19 @@
                 <i class="fa-solid fa-house"></i>
                 Beranda
             </a>
-            <a href="#" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
+            <a href="#content" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
                 <i class="fa-solid fa-circle-info"></i>
                 Karya
             </a>
-            <div class="group relative">
-                <a href="#"
-                    class="text-white hover:text-sky-200 font-medium transition-colors duration-200 flex items-center">
-                    <i class="fa-solid fa-list mr-2 text-black"></i>
+            <div class="w-full flex flex-col items-center">
+                <button id="mobile-kategori-btn"
+                    class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
+                    <i class="fa-solid fa-list"></i>
                     Kategori
-                    <i class="fa-solid fa-chevron-down ml-1 text-black text-sm"></i>
-                </a>
-                <!-- Dropdown list -->
-                <ul
-                    class="absolute left-0 mt-2 bg-white rounded-lg shadow-md text-gray-700 w-40 opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </button>
+
+                <ul id="mobile-kategori-dropdown" class="mt-2 bg-white rounded-lg shadow-md text-gray-700 w-40 hidden">
                     <li>
                         <a href="#" class="block px-4 py-2 hover:bg-sky-200">Kat 1</a>
                     </li>
@@ -126,6 +118,7 @@
                     </li>
                 </ul>
             </div>
+
             <a href="#" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
                 <i class="fa-solid fa-envelope"></i>
                 Tim Pembuat
@@ -148,3 +141,43 @@
         </div>
     </div>
 </div>
+<script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+
+    const kategoriBtn = document.getElementById("kategori-btn");
+    const kategoriDropdown = document.getElementById("kategori-dropdown");
+    const kategoriItems = document.querySelectorAll(".kategori-item");
+    const selectedCategory = document.getElementById("selected-category");
+
+    kategoriBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        kategoriDropdown.classList.toggle("hidden");
+    });
+
+    kategoriItems.forEach(item => {
+        item.addEventListener("click", () => {
+            selectedCategory.textContent = item.textContent;
+            kategoriDropdown.classList.add("hidden");
+        });
+    });
+
+    document.addEventListener("click", () => {
+        kategoriDropdown.classList.add("hidden");
+    });
+
+    // mobile kategori
+    const mobileKategoriBtn = document.getElementById("mobile-kategori-btn");
+    const mobileKategoriDropdown = document.getElementById("mobile-kategori-dropdown");
+
+    mobileKategoriBtn.addEventListener("click", () => {
+        mobileKategoriDropdown.classList.toggle("hidden");
+    });
+
+
+
+</script>

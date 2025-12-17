@@ -11,16 +11,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen font-sans text-gray-900" style="background: linear-gradient(to bottom, #36d7f3 10%, #ffffff 90%); background-attachment: fixed;">
-    
-    {% include 'partials/header.html'   %}
-    
+<body class="min-h-screen font-sans text-gray-900"
+    style="background: linear-gradient(to bottom, #36d7f3 10%, #ffffff 90%); background-attachment: fixed;">
+
+    {% include 'partials/header.html' %}
+
     <main>
         {% block content %}
         {% endblock %}
     </main>
-        
-    {% include 'partials/footer.html'   %}
+
+    {% include 'partials/footer.html' %}
 
 
     <div id="imgModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
@@ -50,6 +51,9 @@
             animation: fadeIn 1s ease-in-out;
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <!-- JS Toggle Mobile Menu -->
     <script>
         const menuBtn = document.getElementById('menu-btn');
@@ -84,6 +88,22 @@
             if (e.target.id === "imgModal") closeModal();
         });
     </script>
+
+    <script>window.addEventListener("scroll", function () {
+    const nav = document.getElementById("navbar");
+
+    if (window.scrollY > 20) {
+        // Saat discroll → jadi transparan
+        nav.classList.add("bg-white/20", "backdrop-blur-lg", "shadow");
+        nav.classList.remove("bg-white/90");
+    } else {
+        // Saat kembali ke atas → jadi solid lagi
+        nav.classList.add("bg-white/90");
+        nav.classList.remove("bg-white/20", "backdrop-blur-lg");
+    }
+});
+</script>
+
 </body>
 
 </html>
