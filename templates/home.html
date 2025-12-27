@@ -7,21 +7,12 @@
     class="flex flex-col-reverse lg:flex-row items-center h-screen justify-between px-6 lg:px-12 py-16 pt-40 gap-10">
     <!-- Text content -->
     <div class="lg:w-1/2 text-center space-y-6 animate-fadeIn">
-        <p class="text-black text-lg text-center font-semibold leading-relaxed mb-6">
-            Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text
-            ever
-            since the 1500s,
-            when an unknown printer took a galley of type and
-            scrambled
-            it to make a type
-            desktop publishing software like Aldus PageMaker
-            including
-            versions of Lorem Ipsum.
+        <p class="text-black text-lg text-center font-semibold leading-relaxed mb-6 ">
+            Rumah Digital untuk Semua Karya Kreatif
+            Tempat berkumpulnya ide, imajinasi, dan ekspresi visual.
+            Gallery Creative adalah sebuah website untuk menampung, memamerkan, dan mengapresiasi berbagai karya digital
+            mulai dari fotografi, desain, ilustrasi, hingga karya visual lainnya.
         </p>
-
-
         {% if 'username' in session %}
         <a href="{{ url_for('dashboard') }}">
             <button
@@ -32,26 +23,64 @@
         {% else %}
         <a href="{{ url_for('login') }}">
             <button
-                class="bg-[#0696ff] px-8 py-3 rounded-full shadow text-white font-semibold rounded-full hover:bg-red-500 hover:scale-110 transition duration-300">
+                class="bg-[#0696ff] px-8 py-3 rounded-full shadow text-white font-semibold rounded-full hover:bg-blue-500 hover:scale-110 transition duration-300">
                 Login Untuk Upload
             </button>
         </a>
         {% endif %}
-
     </div>
-    <!-- Image -->
     <div class="lg:w-1/2 flex justify-center animate-fadeIn">
-        <img src="{{ url_for('static', filename='assets/hero.jpg') }}" alt="illustration"
-            class="rounded-3xl w-3/4 shadow-lg hover:scale-105 transition-transform duration-500">
+        <img src="{{ url_for('static', filename='assets/hero.png') }}" alt="illustration" class="rounded-3xl 
+               w-64 sm:w-60 md:w-64 lg:w-[420px] xl:w-[480px]
+               hover:scale-105 transition-transform duration-500">
     </div>
 </section>
 
 <!-- CONTENT SECTION -->
 <section id="content" class="max-w-7xl mx-auto px-6 py-16 animate-fadeIn">
-    <h2 class="text-3xl font-bold text-[#0696ff] text-center mt-5 mb-3">Daftar Karya</h2>
-    <div class="w-40 h-1 bg-[#0696ff] mx-auto mb-12 rounded-full"></div>
 
+    <!-- HEADER -->
+    <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#0696ff] mb-3">
+            Daftar Karya
+        </h2>
+
+        <div class="w-24 h-1 bg-[#0696ff] mx-auto mb-4 rounded-full"></div>
+
+        <p class="text-sm md:text-base">
+            Jelajahi berbagai karya digital kreatif dari para kreator.
+            Temukan inspirasi melalui fotografi, ilustrasi, dan visual art terbaik.
+        </p>
     </div>
+
+    <!-- SEARCH & SORT -->
+    <div class="mt-10 mb-12">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+
+            <!-- SEARCH -->
+            <div class="relative md:col-span-2">
+                <input type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-xl border border-gray-200 px-5 py-3 pl-11
+                       text-sm focus:outline-none focus:ring-2 focus:ring-[#0696ff]
+                       transition" />
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                </i>
+            </div>
+
+            <!-- SORT -->
+            <div>
+                <select class="w-full rounded-xl border border-gray-200 px-4 py-3
+                       text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#0696ff]
+                       transition cursor-pointer">
+                    <option value="">Urutkan berdasarkan</option>
+                    <option value="latest">Terbaru</option>
+                    <option value="popular">Terpopuler</option>
+                    <option value="az">A–Z</option>
+                    <option value="za">Z–A</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <!-- GRID -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- CARD -->
@@ -73,7 +102,8 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]"
+                            data-img="{{ url_for('static', filename='assets/content1.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -100,7 +130,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content2.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -127,7 +157,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content3.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -154,7 +184,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content4.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -181,7 +211,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content5.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -208,7 +238,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content6.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -235,7 +265,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content7.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -262,7 +292,7 @@
                     </div>
                     <!-- Kanan -->
                     <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]">
+                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content8.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
                         <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
@@ -288,7 +318,8 @@
 
                 <!-- Card 1 -->
                 <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
+                    <img src="{{ url_for('static', filename='assets/team/pai.jpeg') }}"
+                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
                     <h3 class="text-lg font-semibold text-[#0696ff]">Ahmad Rifai</h3>
                     <p class="text-sm text-gray-500 mb-3">Database Engineer</p>
                     <div class="flex justify-center space-x-4 text-gray-500">
@@ -300,7 +331,8 @@
 
                 <!-- Card 2 -->
                 <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
+                    <img src="{{ url_for('static', filename='assets/team/sln.jpeg') }}"
+                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
                     <h3 class="text-lg font-semibold text-[#0696ff]">Selina</h3>
                     <p class="text-sm text-gray-500 mb-3">UI/UX Designer</p>
                     <div class="flex justify-center space-x-4 text-gray-500">
@@ -312,7 +344,8 @@
 
                 <!-- Card 3 -->
                 <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="https://via.placeholder.com/150" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
+                    <img src="{{ url_for('static', filename='assets/team/ags.jpg') }}"
+                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
                     <h3 class="text-lg font-semibold text-[#0696ff]">Agusti</h3>
                     <p class="text-sm text-gray-500 mb-3">UI/UX Designer</p>
                     <div class="flex justify-center space-x-4 text-gray-500">
@@ -323,11 +356,11 @@
                 </div>
             </div>
 
-            <!-- Baris bawah (2 orang, di tengah) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-10 justify-items-center">
                 <!-- Card 4 -->
                 <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="https://via.placeholder.com/150" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
+                    <img src="{{ url_for('static', filename='assets/team/swl.jpg') }}"
+                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
                     <h3 class="text-lg font-semibold text-[#0696ff]">Sawaludin</h3>
                     <p class="text-sm text-gray-500 mb-3">Frontend Developer</p>
                     <div class="flex justify-center space-x-4 text-gray-500">
@@ -339,7 +372,8 @@
 
                 <!-- Card 5 -->
                 <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="https://via.placeholder.com/150" class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
+                    <img src="{{ url_for('static', filename='assets/team/hkl.jpg') }}"
+                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
                     <h3 class="text-lg font-semibold text-[#0696ff]">M. Fachri Haikal</h3>
                     <p class="text-sm text-gray-500 mb-3">Backend Developer</p>
                     <div class="flex justify-center space-x-4 text-gray-500">

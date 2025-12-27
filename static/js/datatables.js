@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const dt = $('#dataTables').DataTable({
     responsive: true,
     scrollX: true,
-    autoWidth: false, // 🔥 KUNCI UTAMA
+    autoWidth: false, 
 
     pageLength: 10,
     lengthMenu: [5, 10, 25, 50],
 
-    order: [[1, 'asc']],
+    order: [],
     columnDefs: [
-      { orderable: false, targets: [0, -1] }
+      { orderable: false, targets: [-1] }
     ],
 
     dom:
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // 🔒 FIX WIDTH PAS SORT / PAGINATION
   dt.on('order.dt draw.dt', function () {
     dt.columns.adjust();
   });

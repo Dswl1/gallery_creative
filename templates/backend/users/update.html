@@ -9,7 +9,7 @@
     </div>
     <h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Edit Profile</h2>
     <!-- Form Inputan -->
-    <form action="/update-profile" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <form action="{{ url_for('update_users' ) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         <div>
             <label for="foto" class="block text-gray-600 text-sm mb-1">Profil</label>
             <input type="file" id="profile_picture" name="profile_picture" accept="image/*"
@@ -47,7 +47,7 @@
 
         <!-- Tombol Aksi -->
         <div class="mt-6 flex justify-center space-x-3">
-            <button type="submit"
+            <button type="submit" onclick="saveChange(event)"
                 class="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">Update</button>
         </div>
     </form>
