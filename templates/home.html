@@ -3,388 +3,332 @@
 
 {% block content %}
 <!-- HERO SECTION -->
-<section id="hero"
-    class="flex flex-col-reverse lg:flex-row items-center h-screen justify-between px-6 lg:px-12 py-16 pt-40 gap-10">
-    <!-- Text content -->
-    <div class="lg:w-1/2 text-center space-y-6 animate-fadeIn">
-        <p class="text-black text-lg text-center font-semibold leading-relaxed mb-6 ">
-            Rumah Digital untuk Semua Karya Kreatif
+<section id="hero" class="relative min-h-screen flex flex-col-reverse lg:flex-row
+           items-center justify-between
+           px-6 lg:px-16
+           pt-40 pb-20 gap-14 overflow-hidden">
+
+    <!-- Background accent -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-sky-400/30 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+
+    <!-- TEXT -->
+    <div class="relative lg:w-1/2 text-center lg:text-left space-y-6 animate-fadeIn">
+        <span class="inline-block px-4 py-1 rounded-full
+                   bg-sky-100 text-sky-700
+                   text-sm font-semibold tracking-wide">
+            ✨ Gallery Creative
+        </span>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold
+                   text-gray-900 leading-tight">
+            Rumah Digital untuk
+            <span class="text-[#0696ff]">Semua Karya Kreatif</span>
+        </h1>
+
+        <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
             Tempat berkumpulnya ide, imajinasi, dan ekspresi visual.
-            Gallery Creative adalah sebuah website untuk menampung, memamerkan, dan mengapresiasi berbagai karya digital
-            mulai dari fotografi, desain, ilustrasi, hingga karya visual lainnya.
+            <strong>Gallery Creative</strong> adalah platform untuk menampung,
+            memamerkan, dan mengapresiasi karya digital seperti fotografi,
+            desain, ilustrasi, dan visual kreatif lainnya.
         </p>
-        {% if 'username' in session %}
-        <a href="{{ url_for('dashboard') }}">
-            <button
-                class="bg-[#0696ff] px-8 py-3 rounded-full shadow text-white font-semibold rounded-full hover:bg-blue-600 hover:scale-110 transition duration-300">
-                Upload Karya
-            </button>
-        </a>
-        {% else %}
-        <a href="{{ url_for('login') }}">
-            <button
-                class="bg-[#0696ff] px-8 py-3 rounded-full shadow text-white font-semibold rounded-full hover:bg-blue-500 hover:scale-110 transition duration-300">
-                Login Untuk Upload
-            </button>
-        </a>
-        {% endif %}
+
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+            {% if 'username' in session %}
+            <a href="{{ url_for('dashboard') }}">
+                <button class="px-8 py-3 rounded-full
+                           bg-[#0696ff] text-white font-semibold
+                           shadow-lg shadow-blue-500/30
+                           hover:bg-blue-600 hover:scale-105
+                           transition-all duration-300">
+                    🚀 Upload Karya
+                </button>
+            </a>
+            {% else %}
+            <a href="{{ url_for('login') }}">
+                <button class="px-8 py-3 rounded-full
+                           bg-[#0696ff] text-white font-semibold
+                           shadow-lg shadow-blue-500/30
+                           hover:bg-blue-500 hover:scale-105
+                           transition-all duration-300">
+                    🔑 Login untuk Upload
+                </button>
+            </a>
+            {% endif %}
+
+            <a href="#content" class="px-8 py-3 rounded-full
+                      border border-gray-300 text-gray-700 font-semibold
+                      hover:bg-gray-100 transition">
+                Lihat Karya
+            </a>
+        </div>
     </div>
-    <div class="lg:w-1/2 flex justify-center animate-fadeIn">
-        <img src="{{ url_for('static', filename='assets/hero.png') }}" alt="illustration" class="rounded-3xl 
-               w-64 sm:w-60 md:w-64 lg:w-[420px] xl:w-[480px]
-               hover:scale-105 transition-transform duration-500">
+
+    <!-- IMAGE -->
+    <div class="relative lg:w-1/2 flex justify-center animate-fadeIn">
+        <div class="absolute inset-0 bg-[#0696ff]/10 rounded-full blur-3xl"></div>
+        <img src="{{ url_for('static', filename='assets/hero.png') }}" alt="illustration" class="relative rounded-3xl
+                    w-64 sm:w-72 md:w-80 lg:w-[400px] xl:w-[420px]
+                    hover:scale-105 transition-transform duration-500">
     </div>
 </section>
 
+
 <!-- CONTENT SECTION -->
-<section id="content" class="max-w-7xl mx-auto px-6 py-16 animate-fadeIn">
+<section id="content" class="relative max-w-7xl mx-auto px-6 py-20 animate-fadeIn reveal">
 
     <!-- HEADER -->
-    <div class="text-center max-w-2xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#0696ff] mb-3">
-            Daftar Karya
+    <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block mb-3 px-4 py-1 text-sm font-semibold
+                     rounded-full bg-sky-100 text-sky-700">
+            🎨 Koleksi Karya
+        </span>
+
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            Daftar <span class="text-[#0696ff]">Karya Kreatif</span>
         </h2>
 
-        <div class="w-24 h-1 bg-[#0696ff] mx-auto mb-4 rounded-full"></div>
-
-        <p class="text-sm md:text-base">
-            Jelajahi berbagai karya digital kreatif dari para kreator.
-            Temukan inspirasi melalui fotografi, ilustrasi, dan visual art terbaik.
+        <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+            Jelajahi berbagai karya digital dari para kreator.
+            Temukan inspirasi melalui fotografi, ilustrasi,
+            dan visual art terbaik.
         </p>
     </div>
 
     <!-- SEARCH & SORT -->
-    <div class="mt-10 mb-12">
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+    <div class="mb-16">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4
+                   bg-white/70 backdrop-blur-md
+                   border border-gray-200
+                   rounded-2xl p-4 shadow-md">
 
             <!-- SEARCH -->
             <div class="relative md:col-span-2">
-                <input type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-xl border border-gray-200 px-5 py-3 pl-11
-                       text-sm focus:outline-none focus:ring-2 focus:ring-[#0696ff]
-                       transition" />
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 </i>
+                <input type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-xl border border-gray-200
+                           px-5 py-3 pl-11 text-sm
+                           focus:outline-none focus:ring-2 focus:ring-[#0696ff]
+                           transition" />
             </div>
 
             <!-- SORT -->
-            <div>
-                <select class="w-full rounded-xl border border-gray-200 px-4 py-3
-                       text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#0696ff]
+            <select class="w-full rounded-xl border border-gray-200 px-4 py-3
+                       text-sm text-gray-600
+                       focus:outline-none focus:ring-2 focus:ring-[#0696ff]
                        transition cursor-pointer">
-                    <option value="">Urutkan berdasarkan</option>
-                    <option value="latest">Terbaru</option>
-                    <option value="popular">Terpopuler</option>
-                    <option value="az">A–Z</option>
-                    <option value="za">Z–A</option>
-                </select>
-            </div>
+                <option value="">Urutkan berdasarkan</option>
+                <option value="latest">Terbaru</option>
+                <option value="popular">Terpopuler</option>
+                <option value="az">A–Z</option>
+                <option value="za">Z–A</option>
+            </select>
         </div>
     </div>
 
     <!-- GRID -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
         <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
+        {% for i in range(1,9) %}
+        <div class="group relative overflow-hidden rounded-2xl
+                   bg-white shadow-lg hover:shadow-2xl
+                   transition-all duration-500 hover:-translate-y-2 cursor-pointer reveal-item">
+
+            <!-- IMAGE -->
             <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content1.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
+                <img src="{{ url_for('static', filename='assets/content' ~ i ~ '.jpg') }}" class="w-full h-56 object-cover
+                           transition-transform duration-700 group-hover:scale-110" alt="Karya {{ i }}">
             </div>
 
             <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
+            <div class="absolute inset-0 bg-gradient-to-t
+                       from-black/70 via-black/20 to-transparent
+                       opacity-0 group-hover:opacity-100
+                       transition-opacity duration-500">
+
+                <div class="absolute bottom-0 w-full px-4 py-4 flex justify-between items-end">
+
+                    <!-- INFO -->
                     <div class="text-white">
-                        <h3 class="font-semibold text-base">Perjalanan berdebu</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
+                        <h3 class="font-semibold text-sm md:text-base">
+                            Judul Karya {{ i }}
+                        </h3>
+                        <p class="text-xs text-gray-300">
+                            Publisher: John Doe
+                        </p>
                     </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]"
-                            data-img="{{ url_for('static', filename='assets/content1.jpg') }}">
+
+                    <!-- ACTION -->
+                    <div class="flex gap-3 text-lg text-white">
+                        <button class="zoom-btn hover:text-[#0696ff] transition"
+                            data-img="{{ url_for('static', filename='assets/content' ~ i ~ '.jpg') }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
+                        <a href="{{ url_for('detail') }}" class="hover:text-[#0696ff] transition">
+                            <i class="fas fa-link"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content2.jpg') }}" alt="Konten 2"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Kakaktua Hijau</h3>
-                        <p class="text-xs text-gray-300">Publisher: Agus Indosat</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content2.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content3.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Judul Karya 3</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content3.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content4.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Judul Karya 4</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content4.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content5.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Judul Karya 5</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content5.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content6.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Judul Karya 6</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content6.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content7.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Judul Karya 7</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content7.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- CARD -->
-        <div class="relative overflow-hidden rounded-xl shadow-lg group cursor-pointer">
-            <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content8.jpg') }}" alt="Konten 1"
-                    class="w-full h-56 object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 zoomable">
-            </div>
-
-            <!-- OVERLAY -->
-            <div
-                class="absolute bottom-0 left-0 w-full h-0 bg-black bg-opacity-60 group-hover:h-[25%] transition-all duration-500 ease-in-out">
-                <div
-                    class="flex justify-between items-end px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-full">
-                    <!-- Kiri -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-base">Judul Karya 8</h3>
-                        <p class="text-xs text-gray-300">Publisher: John Doe</p>
-                    </div>
-                    <!-- Kanan -->
-                    <div class="flex space-x-3 text-white text-lg">
-                        <button class="zoom-btn hover:text-[#0696ff]" data-img="{{ url_for('static', filename='assets/content8.jpg') }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail' ) }}" class="hover:text-[#0696ff]"><i class="fas fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
 
     </div>
 </section>
 
 
-<section class="py-20" id="team">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 text-center">
-        <h2 class="text-3xl font-bold text-[#0696ff] mb-3">Tim Pembuat</h2>
-        <div class="w-40 h-1 bg-[#0696ff] mx-auto mb-12 rounded-full"></div>
 
+<section id="team" class="py-24">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 reveal">
 
-        <!-- Grid utama -->
-        <div class="flex flex-col items-center space-y-10">
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="inline-block mb-3 px-4 py-1 text-sm font-semibold
+                         rounded-full bg-sky-100 text-sky-700">
+                👥 Tim Kami
+            </span>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+                Tim <span class="text-[#0696ff]">Pembuat</span>
+            </h2>
 
-                <!-- Card 1 -->
-                <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="{{ url_for('static', filename='assets/team/pai.jpeg') }}"
-                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
-                    <h3 class="text-lg font-semibold text-[#0696ff]">Ahmad Rifai</h3>
-                    <p class="text-sm text-gray-500 mb-3">Database Engineer</p>
-                    <div class="flex justify-center space-x-4 text-gray-500">
-                        <a href="#"><i class="fab fa-github hover:text-gray-800"></i></a>
-                        <a href="#"><i class="fab fa-linkedin hover:text-blue-700"></i></a>
-                        <a href="#"><i class="fab fa-instagram hover:text-pink-600"></i></a>
+            <p class="text-gray-600 text-sm md:text-base">
+                Orang-orang di balik pengembangan Gallery Creative
+            </p>
+        </div>
+
+        {% set teams = [
+        ('hkl.jpg','M. Fachri Haikal','Backend Developer'),
+        ('swl.jpg','Sawaludin','Frontend Developer'),
+        ('ags.jpg','Agusti','UI/UX Designer'),
+        ('pai.jpeg','Ahmad Rifai','Database Engineer'),
+        ('sln.jpeg','Selina','UI/UX Designer')
+        ] %}
+
+        <!-- ================= MOBILE SLIDER ================= -->
+        <div class="block lg:hidden">
+            <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory
+                        pb-4 px-1 scrollbar-hide">
+
+                {% for img, name, role in teams %}
+                <div class="snap-center shrink-0 w-[85%]">
+
+                    <!-- CARD -->
+                    <div class="group bg-white rounded-3xl p-8
+                                shadow-md border border-gray-100
+                                hover:-translate-y-1 hover:shadow-xl
+                                transition-all duration-300 reveal-item">
+
+                        <!-- Avatar -->
+                        <div class="w-28 h-28 mx-auto mb-6">
+                            <img src="{{ url_for('static', filename='assets/team/' ~ img) }}" class="w-full h-full rounded-full object-cover
+                                       ring-4 ring-[#0696ff]/20">
+                        </div>
+
+                        <!-- Info -->
+                        <h3 class="text-lg font-semibold text-center text-gray-800">
+                            {{ name }}
+                        </h3>
+                        <p class="text-center text-sm text-gray-500 mb-5">
+                            {{ role }}
+                        </p>
+
+                        <!-- Social -->
+                        <div class="flex justify-center gap-5 text-lg text-gray-400">
+                            <i class="fab fa-github hover:text-gray-900 transition"></i>
+                            <i class="fab fa-linkedin hover:text-blue-600 transition"></i>
+                            <i class="fab fa-instagram hover:text-pink-500 transition"></i>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="{{ url_for('static', filename='assets/team/sln.jpeg') }}"
-                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
-                    <h3 class="text-lg font-semibold text-[#0696ff]">Selina</h3>
-                    <p class="text-sm text-gray-500 mb-3">UI/UX Designer</p>
-                    <div class="flex justify-center space-x-4 text-gray-500">
-                        <a href="#"><i class="fab fa-github hover:text-gray-800"></i></a>
-                        <a href="#"><i class="fab fa-linkedin hover:text-blue-700"></i></a>
-                        <a href="#"><i class="fab fa-instagram hover:text-pink-600"></i></a>
-                    </div>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="{{ url_for('static', filename='assets/team/ags.jpg') }}"
-                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
-                    <h3 class="text-lg font-semibold text-[#0696ff]">Agusti</h3>
-                    <p class="text-sm text-gray-500 mb-3">UI/UX Designer</p>
-                    <div class="flex justify-center space-x-4 text-gray-500">
-                        <a href="#"><i class="fab fa-github hover:text-gray-800"></i></a>
-                        <a href="#"><i class="fab fa-linkedin hover:text-blue-700"></i></a>
-                        <a href="#"><i class="fab fa-instagram hover:text-pink-600"></i></a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-10 justify-items-center">
-                <!-- Card 4 -->
-                <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="{{ url_for('static', filename='assets/team/swl.jpg') }}"
-                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
-                    <h3 class="text-lg font-semibold text-[#0696ff]">Sawaludin</h3>
-                    <p class="text-sm text-gray-500 mb-3">Frontend Developer</p>
-                    <div class="flex justify-center space-x-4 text-gray-500">
-                        <a href="#"><i class="fab fa-github hover:text-gray-800"></i></a>
-                        <a href="#"><i class="fab fa-linkedin hover:text-blue-700"></i></a>
-                        <a href="#"><i class="fab fa-instagram hover:text-pink-600"></i></a>
-                    </div>
-                </div>
+            <!-- Swipe hint -->
+            <p class="mt-4 text-center text-xs text-gray-400">
+                Geser untuk melihat tim lainnya →
+            </p>
+        </div>
 
-                <!-- Card 5 -->
-                <div class="bg-white rounded-2xl shadow-md p-6 w-64 hover:shadow-xl transition-all duration-300">
-                    <img src="{{ url_for('static', filename='assets/team/hkl.jpg') }}"
-                        class="w-28 h-28 mx-auto rounded-full mb-4 object-cover">
-                    <h3 class="text-lg font-semibold text-[#0696ff]">M. Fachri Haikal</h3>
-                    <p class="text-sm text-gray-500 mb-3">Backend Developer</p>
-                    <div class="flex justify-center space-x-4 text-gray-500">
-                        <a href="#"><i class="fab fa-github hover:text-gray-800"></i></a>
-                        <a href="#"><i class="fab fa-linkedin hover:text-blue-700"></i></a>
-                        <a href="#"><i class="fab fa-instagram hover:text-pink-600"></i></a>
+        <!-- ================= DESKTOP GRID ================= -->
+        <div class="hidden lg:flex flex-col gap-10">
+
+            <!-- ROW 1 (3 CARD) -->
+            <div class="flex justify-center gap-10">
+                {% for img, name, role in teams[:3] %}
+                <div class="w-full max-w-sm">
+
+                    <!-- CARD -->
+                    <div class="group bg-white rounded-3xl p-8
+                        shadow-md border border-gray-100
+                        hover:-translate-y-2 hover:shadow-xl
+                        transition-all duration-300 reveal-item">
+
+                        <div class="w-28 h-28 mx-auto mb-6">
+                            <img src="{{ url_for('static', filename='assets/team/' ~ img) }}" class="w-full h-full rounded-full object-cover
+                               ring-4 ring-[#0696ff]/20">
+                        </div>
+
+                        <h3 class="text-lg font-semibold text-center text-gray-800">
+                            {{ name }}
+                        </h3>
+                        <p class="text-center text-sm text-gray-500 mb-5">
+                            {{ role }}
+                        </p>
+
+                        <div class="flex justify-center gap-5 text-lg text-gray-400">
+                            <i class="fab fa-github hover:text-gray-900 transition"></i>
+                            <i class="fab fa-linkedin hover:text-blue-600 transition"></i>
+                            <i class="fab fa-instagram hover:text-pink-500 transition"></i>
+                        </div>
                     </div>
+
                 </div>
+                {% endfor %}
+            </div>
+
+            <!-- ROW 2 (2 CARD – CENTER) -->
+            <div class="flex justify-center gap-10">
+                {% for img, name, role in teams[3:] %}
+                <div class="w-full max-w-sm">
+
+                    <!-- CARD (SAMA) -->
+                    <div class="group bg-white rounded-3xl p-8
+                        shadow-md border border-gray-100
+                        hover:-translate-y-2 hover:shadow-xl
+                        transition-all duration-300 reveal-item">
+
+                        <div class="w-28 h-28 mx-auto mb-6">
+                            <img src="{{ url_for('static', filename='assets/team/' ~ img) }}" class="w-full h-full rounded-full object-cover
+                               ring-4 ring-[#0696ff]/20">
+                        </div>
+
+                        <h3 class="text-lg font-semibold text-center text-gray-800">
+                            {{ name }}
+                        </h3>
+                        <p class="text-center text-sm text-gray-500 mb-5">
+                            {{ role }}
+                        </p>
+
+                        <div class="flex justify-center gap-5 text-lg text-gray-400">
+                            <i class="fab fa-github hover:text-gray-900 transition"></i>
+                            <i class="fab fa-linkedin hover:text-blue-600 transition"></i>
+                            <i class="fab fa-instagram hover:text-pink-500 transition"></i>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
             </div>
 
         </div>
+
+
+
     </div>
 </section>
+
 {% endblock %}

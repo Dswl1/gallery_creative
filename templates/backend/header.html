@@ -1,33 +1,35 @@
-<header class="flex justify-between items-center 
-  bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)] 
-  backdrop-blur-md px-6 py-4 border-b border-white/20 shadow-sm">
+<header
+  class="sticky top-0 z-40 flex justify-between items-center
+         bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)]
+         backdrop-blur-md px-6 py-4 border-b border-white/20 shadow-md">
 
-  <!-- Left -->
-  <div class="flex items-center gap-3">
+  <!-- LEFT -->
+  <div class="flex items-center gap-4">
 
     <!-- Sidebar Toggle (Mobile) -->
-    <button id="menuBtn" class="text-white text-xl sm:hidden">
+    <button id="menuBtn"
+      class="sm:hidden text-white text-2xl focus:outline-none">
       <i class="fa fa-bars"></i>
     </button>
 
     <!-- Logo -->
-    <img src="{{ url_for('static', filename='assets/logo.png') }}" class="w-10" alt="">
+    <img src="{{ url_for('static', filename='assets/logo.png') }}"
+         class="w-10 drop-shadow" alt="Logo">
 
     <!-- Title -->
     <a href="{{ url_for('index') }}"
-       class="text-white font-semibold text-lg hover:text-blue-200 transition">
+       class="text-white font-bold text-lg tracking-wide hover:text-blue-200 transition">
       Dashboard
     </a>
   </div>
 
-  <!-- Right -->
+  <!-- RIGHT -->
   {% if 'username' in session %}
   <div
-    class="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-xl text-white">
-    <i class="fa fa-user"></i>
+    class="flex items-center gap-3 bg-white/20 px-4 py-2 rounded-xl
+           text-white shadow-sm">
+    <i class="fa fa-user-circle text-lg"></i>
     <span class="font-medium">{{ session['username'] }}</span>
   </div>
   {% endif %}
 </header>
-
-

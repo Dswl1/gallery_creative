@@ -1,42 +1,101 @@
 {% extends 'backend/index.html' %}
 {% block content %}
-<h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Detail Konten</h2>
-<div class="bg-gray-200 p-6 rounded-lg shadow-md mx-auto w-full">
-  <div class="flex justify-center mb-6">
-    <img src="{{ url_for('static', filename='assets/content1.jpg') }}" alt="Profile Picture" class="w-64 h-64 rounded border-4 border-gray-300">
+
+<section class="max-w-5xl mx-auto">
+
+  <!-- HEADER -->
+  <div class="mb-8 text-center">
+    <span class="inline-block mb-2 px-4 py-1 text-sm font-semibold
+                 rounded-full bg-blue-100 text-blue-700">
+      🖼️ Content Detail
+    </span>
+    <h2 class="text-2xl font-extrabold text-gray-800">
+      Detail Konten
+    </h2>
+    <p class="text-sm text-gray-500 mt-1">
+      Informasi lengkap karya yang diunggah
+    </p>
   </div>
 
-  <div class="space-y-3">
-      <div>
-        <label class="block text-gray-600 text-sm mb-1">Created at</label>
-        <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">10-10-2025</div>
+  <!-- CARD -->
+  <div class="bg-white/70 backdrop-blur-md
+              border border-blue-100
+              rounded-3xl shadow-xl
+              p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <!-- IMAGE -->
+    <div class="flex justify-center items-start">
+      <img src="{{ url_for('static', filename='assets/content1.jpg') }}"
+           class="rounded-2xl shadow-lg
+                  w-full max-w-md object-cover">
+    </div>
+
+    <!-- INFO -->
+    <div class="space-y-4">
+
+      <div class="info-box">
+        <span>Created At</span>
+        <p>10 Oktober 2025</p>
       </div>
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Judul Karya</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Lorem Ipsum</div>
-    </div>
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Publisher</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Asep Uhuy</div>
-    </div>
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Kategori</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Abstrak</div>
-    </div>
-    <div>
-        <label class="block text-gray-600 text-sm mb-1">Deskripsi karya</label>
-        <div class="bg-gray-100 text-gray-800 p-2 h-64 rounded border border-gray-300"> Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text
-                ever
-                since the 1500s,
-                when an unknown printer took a galley of type and
-                scrambled
-                it to make a type
-                desktop publishing software like Aldus PageMaker
-                including
-                versions of Lorem Ipsum.</div>
+
+      <div class="info-box">
+        <span>Judul Karya</span>
+        <p>Lorem Ipsum</p>
+      </div>
+
+      <div class="info-box">
+        <span>Publisher</span>
+        <p>Asep Uhuy</p>
+      </div>
+
+      <div class="info-box">
+        <span>Kategori</span>
+        <p>Abstrak</p>
+      </div>
+
     </div>
   </div>
-</div>
+
+  <!-- DESCRIPTION -->
+  <div class="mt-8 bg-white/70 backdrop-blur-md
+              border border-blue-100
+              rounded-3xl shadow-xl
+              p-8">
+
+    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+      Deskripsi Karya
+    </h3>
+
+    <p class="text-gray-700 leading-relaxed text-sm">
+      Lorem Ipsum is simply dummy text of the printing and
+      typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown
+      printer took a galley of type and scrambled it to make a
+      type specimen book. Desktop publishing software like Aldus
+      PageMaker including versions of Lorem Ipsum.
+    </p>
+
+  </div>
+
+  <!-- ACTION -->
+  <div class="mt-10 flex justify-end gap-4">
+
+    <a href="{{ url_for('update_content') }}"
+       class="px-6 py-3 rounded-xl
+              bg-blue-500 text-white
+              hover:bg-blue-600 transition">
+      Edit
+    </a>
+
+    <button onclick="deleteBtn()"
+            class="px-6 py-3 rounded-xl
+                   bg-red-500 text-white
+                   hover:bg-red-600 transition">
+      Delete
+    </button>
+
+  </div>
+
+</section>
+
 {% endblock %}

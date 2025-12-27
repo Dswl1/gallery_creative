@@ -1,52 +1,93 @@
 {% extends 'home.html' %}
 {% block title %}
-    Gallery Creative | Details
+Gallery Creative | Details
 {% endblock %}
 
 {% block content%}
 <!-- SECTION DETAIL -->
-<section class="max-w-7xl mx-auto px-6 py-12 pt-24">
-    <div class="flex mt-4">
-        <a href="{{ url_for('index' ) }}" class="text-lg text-blue-600 hover:text-blue-400 ">Home/</a>
-        <h1 class="text-lg font-bold mb-6 px-2">Detail Karya</h1>
+<section class="max-w-7xl mx-auto px-6 pt-28 pb-20">
+
+    <!-- BREADCRUMB -->
+    <div class="flex items-center gap-2 text-sm text-gray-500 mb-10">
+        <a href="{{ url_for('index') }}" class="hover:text-blue-500 transition">
+            Home
+        </a>
+        <span>/</span>
+        <span class="text-gray-800 font-semibold">Detail Karya</span>
     </div>
 
-        <!-- GRID UTAMA -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <!-- GAMBAR -->
-            <div class="w-full flex justify-center">
-                <img src="{{ url_for('static', filename='assets/content1.jpg') }}" alt="Karya"
-                    class="rounded-lg shadow-lg object-cover w-full max-w-lg ">
+    <!-- GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- IMAGE SHOWCASE -->
+        <div class="relative group">
+            <div class="absolute inset-0 bg-blue-400/20 blur-3xl rounded-3xl"></div>
+            <img src="{{ url_for('static', filename='assets/content1.jpg') }}" class="relative w-full max-w-xl mx-auto
+                       rounded-3xl shadow-2xl
+                       transition-transform duration-500
+                       group-hover:scale-[1.03]" alt="Karya">
+        </div>
+
+        <!-- CONTENT -->
+        <div class="space-y-10">
+
+            <!-- TITLE -->
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-900 mb-2">
+                    Perjalanan Berdebu
+                </h1>
+                <p class="text-gray-500">
+                    Ilustrasi • Dipublikasikan 27 Oktober 2025
+                </p>
             </div>
 
-            <!-- INFO + DESKRIPSI -->
-            <div class="flex flex-col justify-start space-y-6">
+            <!-- INFO CARD -->
+            <div class="bg-white rounded-3xl p-6
+                        shadow-lg border border-gray-100">
+                <h2 class="text-lg font-semibold text-blue-600 mb-4">
+                    Informasi Karya
+                </h2>
 
-                <!-- BOX INFORMASI -->
-                <div class="bg-white rounded-3xl shadow-xl p-6">
-                    <h2 class="text-xl font-semibold text-blue-600 border-b-2 border-blue-400 pb-2 mb-4 text-center">
-                        Informasi Karya
-                    </h2>
-                    <div class="space-y-3 text-gray-700 text-lg">
-                        <p><strong>Judul</strong> : Perjalanan Berdebu</p>
-                        <p><strong>Kategori</strong> : Ilustrasi</p>
-                        <p><strong>Nama</strong> : John Doe</p>
-                        <p><strong>Date</strong> : 27 Oktober 2025</p>
+                <div class="grid grid-cols-2 gap-4 text-gray-700">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-tag text-blue-500"></i>
+                        <span>Ilustrasi</span>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-user text-blue-500"></i>
+                        <span>John Doe</span>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-calendar text-blue-500"></i>
+                        <span>27 Oktober 2025</span>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-image text-blue-500"></i>
+                        <span>JPEG / PNG</span>
                     </div>
                 </div>
-
-                <!-- DESKRIPSI -->
-                <div class="rounded-2xl  p-6">
-                    <h3 class="text-lg text-center font-semibold text-blue-600 mb-3 border-b border-blue-400 pb-1">Deskripsi</h3>
-                    <p class="text-gray-700 leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis eos dolorem
-                        inventore commodi labore quia voluptatibus non dicta, nihil perferendis
-                        repudiandae officiis neque suscipit officia. Voluptatem tempora deleniti
-                        numquam expedita, maxime error.
-                    </p>
-                </div>
-
             </div>
+
+            <!-- DESCRIPTION -->
+            <div class="bg-white/70 backdrop-blur
+                        rounded-3xl p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                    Deskripsi
+                </h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quis eos dolorem inventore commodi labore quia voluptatibus
+                    non dicta, nihil perferendis repudiandae officiis neque
+                    suscipit officia. Voluptatem tempora deleniti numquam
+                    expedita.
+                </p>
+            </div>
+
         </div>
-    </section>
-    {% endblock %}
+    </div>
+</section>
+
+{% endblock %}

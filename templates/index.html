@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='assets/logo.png') }}" type="image/png">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -56,53 +57,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <!-- JS Toggle Mobile Menu -->
-    <script>
-
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-        });
-
-        const zoomButtons = document.querySelectorAll('.zoom-btn');
-        const modal = document.getElementById('imgModal');
-        const modalImg = document.getElementById('modalImg');
-
-        zoomButtons.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                const card = e.target.closest('.relative');
-                const img = card.querySelector('img.zoomable');
-                modalImg.src = img.src; // ambil src dari img di card
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            });
-        });
-
-        function closeModal() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target.id === "imgModal") closeModal();
-        });
-    </script>
-
-    <script>window.addEventListener("scroll", function () {
-            const nav = document.getElementById("navbar");
-
-            if (window.scrollY > 20) {
-                nav.classList.add("bg-white/20", "backdrop-blur-lg", "shadow");
-                nav.classList.remove("bg-white/90");
-            } else {
-                nav.classList.add("bg-white/90");
-                nav.classList.remove("bg-white/20", "backdrop-blur-lg");
-            }
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
 
 </body>
 

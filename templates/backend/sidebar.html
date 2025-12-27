@@ -1,42 +1,54 @@
 <aside id="sidebar"
-  class="w-56 bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)]
-  backdrop-blur-xl min-h-screen border-r border-white/30 p-5
-  fixed top-0 left-0 -translate-x-full sm:translate-x-0
-  transition-transform duration-300 z-50 sm:static">
+  class="fixed sm:static top-0 left-0 z-50
+         w-64 min-h-screen
+         bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)]
+         backdrop-blur-xl border-r border-white/30
+         p-5
+         transform -translate-x-full sm:translate-x-0
+         transition-transform duration-300 ease-in-out">
 
-  <nav class="space-y-2 m-4">
+  <nav class="mt-16 sm:mt-4 space-y-1 text-white">
+
+    <!-- PROFILE -->
     <a href="{{ url_for('dashboard') }}"
-      class="block font-semibold px-4 py-2 -mx-5 rounded-md hover:bg-blue-500 hover:text-white transition">
+      class="flex items-center gap-3 px-4 py-3 rounded-xl
+             hover:bg-white/20 transition font-semibold">
       <i class="fa fa-user"></i> Profile
     </a>
 
     {% if role == 'admin' %}
     <a href="{{ url_for('dashboard_users') }}"
-      class="block font-semibold px-4 py-2 -mx-5 rounded-md hover:bg-blue-500 hover:text-white transition">
+      class="flex items-center gap-3 px-4 py-3 rounded-xl
+             hover:bg-white/20 transition font-semibold">
       <i class="fa fa-users"></i> Kelola Akun
     </a>
 
     <a href="{{ url_for('dashboard_adm_content') }}"
-      class="block font-semibold px-4 py-2 -mx-5 rounded-md hover:bg-blue-500 hover:text-white transition">
+      class="flex items-center gap-3 px-4 py-3 rounded-xl
+             hover:bg-white/20 transition font-semibold">
       <i class="fa fa-image"></i> Semua Konten
     </a>
 
     <a href="{{ url_for('dashboard_content') }}"
-      class="block font-semibold px-4 py-2 -mx-5 rounded-md hover:bg-blue-500 hover:text-white transition">
-      <i class="fa fa-image"></i> Konten Saya
+      class="flex items-center gap-3 px-4 py-3 rounded-xl
+             hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-folder-open"></i> Konten Saya
     </a>
     {% endif %}
 
     {% if role == 'user' %}
     <a href="{{ url_for('dashboard_content') }}"
-      class="block font-semibold px-4 py-2 -mx-5 rounded-md hover:bg-blue-500 hover:text-white transition">
-      <i class="fa fa-image"></i> Konten Saya
+      class="flex items-center gap-3 px-4 py-3 rounded-xl
+             hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-folder-open"></i> Konten Saya
     </a>
     {% endif %}
 
-    <div class="mt-10">
+    <!-- LOGOUT -->
+    <div class="mt-10 border-t border-white/30 pt-4">
       <a href="{{ url_for('logout') }}"
-        class="block font-semibold px-4 py-2 -mx-5 rounded-md hover:bg-red-500 hover:text-white transition text-red-700 flex items-center gap-2">
+        class="flex items-center gap-3 px-4 py-3 rounded-xl
+               text-red-200 hover:bg-red-500 hover:text-white transition font-semibold">
         <i class="fa fa-sign-out-alt"></i> Logout
       </a>
     </div>

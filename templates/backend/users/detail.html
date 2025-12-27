@@ -1,40 +1,84 @@
 {% extends 'backend/index.html' %}
 {% block content %}
-<div class="bg-gray-200 p-6 rounded-lg shadow-md mx-auto w-full">
-  <!-- Foto Profil -->
-  <div class="flex justify-center mb-6">
-    <img src="{{ url_for('static', filename='assets/profile.png') }}" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-gray-300">
+
+<div class="max-w-4xl mx-auto">
+
+  <!-- CARD -->
+  <div class="bg-white rounded-3xl shadow-xl p-8">
+
+    <!-- PROFILE HEADER -->
+    <div class="flex flex-col items-center text-center mb-10">
+      <div class="relative">
+        <img src="{{ url_for('static', filename='assets/profile.png') }}"
+             class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
+        <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+      </div>
+
+      <h2 class="mt-4 text-2xl font-bold text-gray-800">
+        Asep Ganteng
+      </h2>
+      <p class="text-sm text-gray-500">
+        Administrator
+      </p>
+    </div>
+
+    <!-- INFO GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- ITEM -->
+      <div class="bg-gray-50 rounded-xl p-4 border">
+        <p class="text-xs text-gray-500 mb-1">Email</p>
+        <p class="font-medium text-gray-800">
+          asepgurun@gmail.com
+        </p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4 border">
+        <p class="text-xs text-gray-500 mb-1">No HP</p>
+        <p class="font-medium text-gray-800">
+          081234567890
+        </p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4 border">
+        <p class="text-xs text-gray-500 mb-1">Username</p>
+        <p class="font-medium text-gray-800">
+          asep_uhuy
+        </p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-4 border">
+        <p class="text-xs text-gray-500 mb-1">Password</p>
+        <p class="font-medium tracking-widest text-gray-800">
+          ••••••••
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ACTION -->
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-end">
+
+      <a href="{{ url_for('update_users') }}">
+        <button class="w-full sm:w-auto px-6 py-3 rounded-xl
+                       bg-blue-500 text-white font-semibold
+                       hover:bg-blue-600 hover:shadow-lg
+                       transition">
+          ✏️ Edit Profile
+        </button>
+      </a>
+
+      <button class="w-full sm:w-auto px-6 py-3 rounded-xl
+                     bg-red-500/10 text-red-600 font-semibold
+                     hover:bg-red-500 hover:text-white
+                     transition">
+        🗑️ Delete Account
+      </button>
+
+    </div>
+
   </div>
 
-  <h2 class="text-xl font-semibold text-gray-800 text-center mb-4">Profile</h2>
-
-  <!-- Data Profil -->
-  <div class="space-y-3">
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Nama</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Asep Ganteng</div>
-    </div>
-
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Email</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">Asepgurun@gmail.com</div>
-    </div>
-
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">No HP</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">081234567890</div>
-    </div>
-
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Username</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">asep_uhuy</div>
-    </div>
-
-    <div>
-      <label class="block text-gray-600 text-sm mb-1">Password</label>
-      <div class="bg-gray-100 text-gray-800 p-2 rounded border border-gray-300">********</div>
-    </div>
-  </div>
 </div>
 
 {% endblock %}
