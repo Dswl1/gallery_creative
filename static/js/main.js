@@ -49,22 +49,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // SWEETALERT
-function deleteBtn() {
+function confirmDelete() {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
+    title: 'Yakin hapus akun?',
+    text: 'Akun akan dihapus permanen!',
+    icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!"
+    confirmButtonColor: '#ef4444',
+    cancelButtonColor: '#6b7280',
+    confirmButtonText: 'Ya, hapus',
+    cancelButtonText: 'Batal'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success"
-      });
+      document.getElementById('deleteForm').submit();
     }
   });
 }
@@ -150,3 +147,12 @@ function initImageModal() {
   }
 }
 document.addEventListener('DOMContentLoaded', initImageModal);
+
+
+function previewImage(event) {
+  const reader = new FileReader();
+  reader.onload = function () {
+    document.getElementById('preview').src = reader.result;
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}

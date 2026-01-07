@@ -9,16 +9,20 @@
     <!-- PROFILE HEADER -->
     <div class="flex flex-col items-center text-center mb-10">
       <div class="relative">
-        <img src="{{ url_for('static', filename='assets/profile.png') }}"
-             class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
+        <img src="
+        {% if user.profile %}
+          {{ url_for('static', filename='assets/' ~ user.profile) }}
+       {% else %}
+          {{ url_for('static', filename='assets/profile.png') }}
+       {% endif %}" class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
         <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
       </div>
 
       <h2 class="mt-4 text-2xl font-bold text-gray-800">
-        Asep Ganteng
+        {{ user.username }}
       </h2>
       <p class="text-sm text-gray-500">
-        Administrator
+        {{ user.role }}
       </p>
     </div>
 
@@ -29,21 +33,21 @@
       <div class="bg-gray-50 rounded-xl p-4 border">
         <p class="text-xs text-gray-500 mb-1">Email</p>
         <p class="font-medium text-gray-800">
-          asepgurun@gmail.com
+          {{ user.email }}
         </p>
       </div>
 
       <div class="bg-gray-50 rounded-xl p-4 border">
         <p class="text-xs text-gray-500 mb-1">No HP</p>
         <p class="font-medium text-gray-800">
-          081234567890
+          {{ user.phone }}
         </p>
       </div>
 
       <div class="bg-gray-50 rounded-xl p-4 border">
         <p class="text-xs text-gray-500 mb-1">Username</p>
         <p class="font-medium text-gray-800">
-          asep_uhuy
+          {{ user.username }}
         </p>
       </div>
 
@@ -68,12 +72,15 @@
         </button>
       </a>
 
-      <button class="w-full sm:w-auto px-6 py-3 rounded-xl
-                     bg-red-500/10 text-red-600 font-semibold
-                     hover:bg-red-500 hover:text-white
-                     transition">
-        🗑️ Delete Account
-      </button>
+      <form action="{{ url_for('delete_own_account') }}" method="POST"
+        onsubmit="return confirm('Akun akan dihapus permanen. Lanjutkan?')">
+        <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl
+                 bg-red-500/10 text-red-600 font-semibold
+                 hover:bg-red-500 hover:text-white
+                 transition">
+          🗑️ Delete Account
+        </button>
+      </form>
 
     </div>
 

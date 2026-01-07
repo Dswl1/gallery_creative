@@ -25,33 +25,29 @@
 
     <!-- IMAGE PREVIEW -->
     <div class="flex flex-col items-center gap-4">
-      <img src="{{ url_for('static', filename='assets/content1.jpg') }}"
-           class="w-full max-w-md rounded-2xl shadow-lg object-cover">
-
-      <label class="w-full">
-        <span class="block text-sm text-gray-600 mb-1">Ganti Gambar</span>
-        <input type="file" name="gambar_karya" accept="image/*"
-               class="w-full p-2 rounded border border-gray-300
-                      focus:outline-none focus:ring-2 focus:ring-yellow-500">
-      </label>
+      <img id="preview" src="{{ url_for('static', filename='assets/' ~ image.filename) }}"
+        class="w-full max-w-md rounded-2xl shadow-lg object-cover">
     </div>
 
     <!-- FORM -->
-    <form action="/update-content" method="POST"
-          enctype="multipart/form-data"
-          class="space-y-4">
-
+    <form action="{{ url_for('update_content', id=image.id ) }}" method="POST" enctype="multipart/form-data"
+      class="space-y-4">
+      <div>
+        <label class="w-full">
+          <span class="block text-sm text-gray-600 mb-1">Ganti Gambar</span>
+          <input type="file" name="gambar_karya" accept="image/*" class="w-full p-2 rounded border border-gray-300
+                      focus:outline-none focus:ring-2 focus:ring-yellow-500"  onchange="previewImage(event)">
+        </label>
+      </div>
       <div>
         <label class="block text-sm text-gray-600 mb-1">Judul Karya</label>
-        <input type="text" name="judul" value="Lorem Ipsum"
-               class="w-full p-2 rounded border border-gray-300
+        <input type="text" name="judul" value="{{ image.title }}" class="w-full p-2 rounded border border-gray-300
                       focus:ring-2 focus:ring-yellow-500">
       </div>
 
       <div>
         <label class="block text-sm text-gray-600 mb-1">Kategori</label>
-        <select name="kategori"
-                class="w-full p-2 rounded border border-gray-300
+        <select name="kategori" class="w-full p-2 rounded border border-gray-300
                        focus:ring-2 focus:ring-yellow-500">
           <option value="abstrak" selected>Abstrak</option>
           <option value="nature">Nature</option>
@@ -61,23 +57,20 @@
 
       <div>
         <label class="block text-sm text-gray-600 mb-1">Deskripsi</label>
-        <textarea name="deskripsi"
-                  class="w-full h-52 p-3 rounded border border-gray-300
-                         focus:ring-2 focus:ring-yellow-500">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</textarea>
+        <textarea name="deskripsi" class="w-full h-52 p-3 rounded border border-gray-300
+                         focus:ring-2 focus:ring-yellow-500">{{ image.description }}</textarea>
       </div>
 
       <!-- ACTION -->
       <div class="flex justify-end gap-4 pt-4">
-        <a href="{{ url_for('detail_content') }}"
-           class="px-6 py-2 rounded-xl
+        <a href="{{ url_for('dashboard_content') }}" class="px-6 py-2 rounded-xl
                   bg-gray-200 hover:bg-gray-300 transition">
           Batal
         </a>
 
-        <button type="submit"
-                class="px-6 py-2 rounded-xl
-                       bg-yellow-500 text-white
-                       hover:bg-yellow-600 transition">
+        <button type="submit" class="px-6 py-2 rounded-xl
+                       bg-blue-500 text-white
+                       hover:bg-blue-600 transition">
           Update
         </button>
       </div>

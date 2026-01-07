@@ -30,20 +30,6 @@
         <!-- Form -->
         <form method="POST" action="{{ url_for('register') }}" class="space-y-4 sm:space-y-5">
 
-            <!-- Nama -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                    Nama Lengkap
-                </label>
-                <div class="flex items-center bg-white rounded-lg
-                           border border-gray-300
-                           focus-within:ring-2 focus-within:ring-sky-400">
-                    <i class="fa-solid fa-id-card text-gray-500 px-3"></i>
-                    <input type="text" name="nama" required class="flex-1 py-2 px-2 bg-transparent outline-none
-                                  text-gray-800 placeholder-gray-400 text-sm" placeholder="Masukkan nama lengkap">
-                </div>
-            </div>
-
             <!-- Username -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
@@ -83,6 +69,20 @@
                     <i class="fa-solid fa-lock text-gray-500 px-3"></i>
                     <input type="password" name="password" required class="flex-1 py-2 px-2 bg-transparent outline-none
                                   text-gray-800 placeholder-gray-400 text-sm" placeholder="Buat password">
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Konfirmasi Password
+                </label>
+                <div class="flex items-center bg-white rounded-lg
+                           border border-gray-300
+                           focus-within:ring-2 focus-within:ring-sky-400">
+                    <i class="fa-solid fa-lock text-gray-500 px-3"></i>
+                    <input type="password" name="confirm_password" required class="flex-1 py-2 px-2 bg-transparent outline-none
+                                  text-gray-800 placeholder-gray-400 text-sm" placeholder="Konfirmasi password">
                 </div>
             </div>
 

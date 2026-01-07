@@ -1,339 +1,62 @@
 {% extends 'backend/index.html' %}
 {% block content %}
+
 <h2 class="text-2xl font-semibold text-center mb-3">Data Users</h2>
 
-<!-- SEARCH -->
-<!-- <div class="mb-4 flex justify-end">
-    <input type="text" placeholder="Cari user..."
-        class="bg-white/80 border border-stone-800/40 px-3 py-2 rounded-md shadow-sm w-full max-w-xs focus:ring focus:ring-blue-200" />
-</div> -->
 <div class="flex justify-end">
-    <a href="{{ url_for('create_users' ) }}" class="btn bg-blue-500 p-2 mb-2 rounded-md">Tambah User</i></a>
+    <a href="{{ url_for('create_users') }}"
+       class="bg-blue-500 text-white p-2 mb-2 rounded-md">
+        Tambah User
+    </a>
 </div>
 
-<!-- TABLE WRAPPER -->
 <div class="datatable-container">
     <table id="dataTables" class="datatable">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Waktu Dibuat</th>
+                <th>Role</th>
                 <th>Aksi</th>
             </tr>
         </thead>
+
         <tbody>
+        {% for user in users %}
             <tr>
-                <td class="text-center">1</td>
-                <td>Lorem Ipsum</td>
-                <td>lorem123</td>
-                <td>lorem@mail.com</td>
-                <td>12-10-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition ">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">2</td>
-                <td>Agus Indosat</td>
-                <td>Gus Agus123</td>
-                <td>Agus@mail.com</td>
-                <td>12-10-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td>Andi Saputra</td>
-                <td>andi123</td>
-                <td>andi@mail.com</td>
-                <td>01-01-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
+                <td class="text-center">{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
 
-            <tr>
-                <td class="text-center">4</td>
-                <td>Budi Santoso</td>
-                <td>budi456</td>
-                <td>budi@mail.com</td>
-                <td>05-01-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
+                <td class="p-3 flex justify-center gap-2">
 
-            <tr>
-                <td class="text-center">5</td>
-                <td>Citra Lestari</td>
-                <td>citra789</td>
-                <td>citra@mail.com</td>
-                <td>10-01-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
+                    <!-- DETAIL -->
+                    <a href="{{ url_for('users_detail', id=user.id) }}">
+                        <button class="p-2 rounded-md bg-green-500 text-white">
+                            <i class="fa fa-eye"></i>
                         </button>
                     </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
 
-            <tr>
-                <td class="text-center">6</td>
-                <td>Dewi Anggraini</td>
-                <td>dewi321</td>
-                <td>dewi@mail.com</td>
-                <td>15-01-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
+                    <!-- EDIT -->
+                    <a href="{{ url_for('update_users', id=user.id) }}">
+                        <button class="p-2 rounded-md bg-blue-500 text-white">
+                            <i class="fa fa-pen"></i>
                         </button>
                     </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
 
-            <tr>
-                <td class="text-center">7</td>
-                <td>Eko Prasetyo</td>
-                <td>eko654</td>
-                <td>eko@mail.com</td>
-                <td>20-01-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
+                    <!-- DELETE -->
+                    <a href="{{ url_for('users_delete', id=user.id) }}"
+                        onclick="return confirm('Yakin hapus konten ini?')">
+                        <button class="p-2 rounded-md bg-red-500 text-white hover:bg-red-600">
+                            <i class="fa fa-trash"></i>
                         </button>
                     </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
 
-            <tr>
-                <td class="text-center">8</td>
-                <td>Fitri Handayani</td>
-                <td>fitri987</td>
-                <td>fitri@mail.com</td>
-                <td>25-01-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
                 </td>
             </tr>
-
-            <tr>
-                <td class="text-center">9</td>
-                <td>Gilang Ramadhan</td>
-                <td>gilang111</td>
-                <td>gilang@mail.com</td>
-                <td>01-02-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="text-center">10</td>
-                <td>Hani Oktavia</td>
-                <td>hani222</td>
-                <td>hani@mail.com</td>
-                <td>05-02-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="text-center">11</td>
-                <td>Irfan Maulana</td>
-                <td>irfan333</td>
-                <td>irfan@mail.com</td>
-                <td>10-02-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="text-center">12</td>
-                <td>Joko Susilo</td>
-                <td>joko444</td>
-                <td>joko@mail.com</td>
-                <td>15-02-2025</td>
-                <td class="p-3 flex justify-center items-center gap-2 sm:gap-3">
-                    <a href="{{ url_for('detail_users' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-green-500 text-white hover:bg-green-600 transition">
-                            <i class="fa fa-eye text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="{{ url_for('update_content' ) }}">
-                        <button class="p-2 sm:p-3 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition">
-                            <i class="fa fa-pen text-sm"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button onclick="deleteBtn()"
-                            class="p-2 sm:p-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
-                            <i class="fa fa-trash text-sm"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>

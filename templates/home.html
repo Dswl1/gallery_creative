@@ -3,80 +3,86 @@
 
 {% block content %}
 <!-- HERO SECTION -->
-<section id="hero" class="relative min-h-screen flex flex-col-reverse lg:flex-row
-           items-center justify-between
-           px-6 lg:px-16
-           pt-40 pb-20 gap-14 overflow-hidden">
+<section id="hero" class="relative min-h-[85vh] lg:min-h-[80vh]
+         flex flex-col-reverse lg:flex-row
+         items-center justify-between
+         px-6 lg:px-14
+         pt-28 lg:pt-32 pb-16
+         gap-12 overflow-hidden">
 
-    <!-- Background accent -->
-    <div class="absolute -top-32 -left-32 w-96 h-96 bg-sky-400/30 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/3 -right-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+    <!-- Background accent (diperkecil) -->
+    <div class="absolute -top-40 -left-40 w-80 h-80 bg-sky-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
 
     <!-- TEXT -->
-    <div class="relative lg:w-1/2 text-center lg:text-left space-y-6 animate-fadeIn">
+    <div class="relative lg:w-1/2 text-center lg:text-left space-y-5">
+
         <span class="inline-block px-4 py-1 rounded-full
-                   bg-sky-100 text-sky-700
-                   text-sm font-semibold tracking-wide">
+                 bg-sky-100 text-sky-700
+                 text-xs font-semibold tracking-wide">
             ✨ Gallery Creative
         </span>
 
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold
-                   text-gray-900 leading-tight">
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px]
+               font-extrabold text-gray-900 leading-tight">
             Rumah Digital untuk
-            <span class="text-[#0696ff]">Semua Karya Kreatif</span>
+            <span class="text-[#0696ff]">Karya Kreatif</span>
         </h1>
 
-        <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-            Tempat berkumpulnya ide, imajinasi, dan ekspresi visual.
-            <strong>Gallery Creative</strong> adalah platform untuk menampung,
-            memamerkan, dan mengapresiasi karya digital seperti fotografi,
-            desain, ilustrasi, dan visual kreatif lainnya.
-        </p>
+        <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0"> Tempat berkumpulnya ide,
+            imajinasi, dan ekspresi visual. <strong>Gallery Creative</strong> adalah platform untuk menampung,
+            memamerkan, dan mengapresiasi karya digital seperti fotografi, desain, ilustrasi, dan visual kreatif
+            lainnya. </p>
 
         <!-- CTA -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+        <div class="flex flex-col sm:flex-row gap-3
+                justify-center lg:justify-start pt-2">
+
             {% if 'username' in session %}
             <a href="{{ url_for('dashboard') }}">
-                <button class="px-8 py-3 rounded-full
-                           bg-[#0696ff] text-white font-semibold
-                           shadow-lg shadow-blue-500/30
-                           hover:bg-blue-600 hover:scale-105
-                           transition-all duration-300">
+                <button class="px-7 py-2.5 rounded-full
+                       bg-[#0696ff] text-white text-sm font-semibold
+                       shadow-md shadow-blue-500/30
+                       hover:bg-blue-600 hover:scale-105
+                       transition-all">
                     🚀 Upload Karya
                 </button>
             </a>
             {% else %}
             <a href="{{ url_for('login') }}">
-                <button class="px-8 py-3 rounded-full
-                           bg-[#0696ff] text-white font-semibold
-                           shadow-lg shadow-blue-500/30
-                           hover:bg-blue-500 hover:scale-105
-                           transition-all duration-300">
+                <button class="px-7 py-2.5 rounded-full
+                       bg-[#0696ff] text-white text-sm font-semibold
+                       shadow-md shadow-blue-500/30
+                       hover:bg-blue-500 hover:scale-105
+                       transition-all">
                     🔑 Login untuk Upload
                 </button>
             </a>
             {% endif %}
 
-            <a href="#content" class="px-8 py-3 rounded-full
-                      border border-gray-300 text-gray-700 font-semibold
-                      hover:bg-gray-100 transition">
+            <a href="#content" class="px-7 py-2.5 rounded-full
+                border border-gray-300 text-gray-700 text-sm font-semibold
+                hover:bg-gray-100 transition">
                 Lihat Karya
             </a>
         </div>
     </div>
 
     <!-- IMAGE -->
-    <div class="relative lg:w-1/2 flex justify-center animate-fadeIn">
+    <div class="relative lg:w-1/2 flex justify-center">
         <div class="absolute inset-0 bg-[#0696ff]/10 rounded-full blur-3xl"></div>
+
         <img src="{{ url_for('static', filename='assets/hero.png') }}" alt="illustration" class="relative rounded-3xl
-                    w-64 sm:w-72 md:w-80 lg:w-[400px] xl:w-[420px]
-                    hover:scale-105 transition-transform duration-500">
+                w-56 sm:w-64 md:w-72 lg:w-80 xl:w-[340px]
+                hover:scale-105 transition-transform duration-500">
     </div>
+
 </section>
 
 
+
 <!-- CONTENT SECTION -->
-<section id="content" class="relative max-w-7xl mx-auto px-6 py-20 animate-fadeIn reveal">
+<section id="content" class="relative max-w-7xl mx-auto px-6 ml-10 mr-10 py-20 animate-fadeIn reveal">
 
     <!-- HEADER -->
     <div class="text-center max-w-2xl mx-auto mb-16">
@@ -107,18 +113,17 @@
             <div class="relative md:col-span-2">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 </i>
-                <input type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-xl border border-gray-200
+                <input id="searchInput" type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-xl border border-gray-200
                            px-5 py-3 pl-11 text-sm
                            focus:outline-none focus:ring-2 focus:ring-[#0696ff]
                            transition" />
             </div>
 
             <!-- SORT -->
-            <select class="w-full rounded-xl border border-gray-200 px-4 py-3
+            <select id="sortSelect" class="w-full rounded-xl border border-gray-200 px-4 py-3
                        text-sm text-gray-600
                        focus:outline-none focus:ring-2 focus:ring-[#0696ff]
                        transition cursor-pointer">
-                <option value="">Urutkan berdasarkan</option>
                 <option value="latest">Terbaru</option>
                 <option value="popular">Terpopuler</option>
                 <option value="az">A–Z</option>
@@ -131,15 +136,16 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
         <!-- CARD -->
-        {% for i in range(1,9) %}
+        {% for img in contents %}
         <div class="group relative overflow-hidden rounded-2xl
                    bg-white shadow-lg hover:shadow-2xl
                    transition-all duration-500 hover:-translate-y-2 cursor-pointer reveal-item">
 
             <!-- IMAGE -->
             <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/content' ~ i ~ '.jpg') }}" class="w-full h-56 object-cover
-                           transition-transform duration-700 group-hover:scale-110" alt="Karya {{ i }}">
+                <img src="{{ url_for('static', filename='assets/' ~ img.filename) }}" class="w-full h-56 object-cover
+            transition-transform duration-700 group-hover:scale-110" alt="{{ img.title }}">
+
             </div>
 
             <!-- OVERLAY -->
@@ -153,22 +159,23 @@
                     <!-- INFO -->
                     <div class="text-white">
                         <h3 class="font-semibold text-sm md:text-base">
-                            Judul Karya {{ i }}
+                            {{ img.title }}
                         </h3>
                         <p class="text-xs text-gray-300">
-                            Publisher: John Doe
+                            {{ img.username }}
                         </p>
                     </div>
 
                     <!-- ACTION -->
                     <div class="flex gap-3 text-lg text-white">
                         <button class="zoom-btn hover:text-[#0696ff] transition"
-                            data-img="{{ url_for('static', filename='assets/content' ~ i ~ '.jpg') }}">
+                            data-img="{{ url_for('static', filename='assets/' ~ img.filename) }}">
                             <i class="fas fa-search-plus"></i>
                         </button>
-                        <a href="{{ url_for('detail') }}" class="hover:text-[#0696ff] transition">
+                        <a href="{{ url_for('detail', id=img.id) }}" class="hover:text-[#0696ff] transition">
                             <i class="fas fa-link"></i>
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -262,29 +269,31 @@
                 <div class="w-full max-w-sm">
 
                     <!-- CARD -->
-                    <div class="group bg-white rounded-3xl p-8
-                        shadow-md border border-gray-100
-                        hover:-translate-y-2 hover:shadow-xl
-                        transition-all duration-300 reveal-item">
+                    <div class="group bg-white rounded-3xl p-6
+            shadow-md border border-gray-100
+            hover:-translate-y-1 hover:shadow-xl
+            transition-all duration-300 reveal-item">
 
-                        <div class="w-28 h-28 mx-auto mb-6">
+                        <div class="w-24 h-24 mx-auto mb-5">
                             <img src="{{ url_for('static', filename='assets/team/' ~ img) }}" class="w-full h-full rounded-full object-cover
-                               ring-4 ring-[#0696ff]/20">
+                ring-4 ring-[#0696ff]/20">
                         </div>
 
-                        <h3 class="text-lg font-semibold text-center text-gray-800">
+                        <h3 class="text-base font-semibold text-center text-gray-800">
                             {{ name }}
                         </h3>
-                        <p class="text-center text-sm text-gray-500 mb-5">
+
+                        <p class="text-center text-sm text-gray-500 mb-4">
                             {{ role }}
                         </p>
 
-                        <div class="flex justify-center gap-5 text-lg text-gray-400">
+                        <div class="flex justify-center gap-4 text-base text-gray-400">
                             <i class="fab fa-github hover:text-gray-900 transition"></i>
                             <i class="fab fa-linkedin hover:text-blue-600 transition"></i>
                             <i class="fab fa-instagram hover:text-pink-500 transition"></i>
                         </div>
                     </div>
+
 
                 </div>
                 {% endfor %}
@@ -296,38 +305,37 @@
                 <div class="w-full max-w-sm">
 
                     <!-- CARD (SAMA) -->
-                    <div class="group bg-white rounded-3xl p-8
+                    <div class="group bg-white rounded-3xl p-6
                         shadow-md border border-gray-100
-                        hover:-translate-y-2 hover:shadow-xl
+                        hover:-translate-y-1 hover:shadow-xl
                         transition-all duration-300 reveal-item">
 
-                        <div class="w-28 h-28 mx-auto mb-6">
+                        <div class="w-24 h-24 mx-auto mb-5">
                             <img src="{{ url_for('static', filename='assets/team/' ~ img) }}" class="w-full h-full rounded-full object-cover
-                               ring-4 ring-[#0696ff]/20">
+                            ring-4 ring-[#0696ff]/20">
                         </div>
 
-                        <h3 class="text-lg font-semibold text-center text-gray-800">
+                        <h3 class="text-base font-semibold text-center text-gray-800">
                             {{ name }}
                         </h3>
-                        <p class="text-center text-sm text-gray-500 mb-5">
+
+                        <p class="text-center text-sm text-gray-500 mb-4">
                             {{ role }}
                         </p>
 
-                        <div class="flex justify-center gap-5 text-lg text-gray-400">
+                        <div class="flex justify-center gap-4 text-base text-gray-400">
                             <i class="fab fa-github hover:text-gray-900 transition"></i>
                             <i class="fab fa-linkedin hover:text-blue-600 transition"></i>
                             <i class="fab fa-instagram hover:text-pink-500 transition"></i>
                         </div>
                     </div>
 
+
                 </div>
                 {% endfor %}
             </div>
 
         </div>
-
-
-
     </div>
 </section>
 

@@ -15,10 +15,10 @@
       </div>
 
       <h2 class="mt-4 text-2xl font-bold text-gray-800">
-        Asep Ganteng
+        {{ user.username }}
       </h2>
       <p class="text-sm text-gray-500">
-        Administrator
+        {{ user.role }}
       </p>
     </div>
 
@@ -29,21 +29,14 @@
       <div class="bg-gray-50 rounded-xl p-4 border">
         <p class="text-xs text-gray-500 mb-1">Email</p>
         <p class="font-medium text-gray-800">
-          asepgurun@gmail.com
+          {{ user.email }}
         </p>
       </div>
 
       <div class="bg-gray-50 rounded-xl p-4 border">
         <p class="text-xs text-gray-500 mb-1">No HP</p>
         <p class="font-medium text-gray-800">
-          081234567890
-        </p>
-      </div>
-
-      <div class="bg-gray-50 rounded-xl p-4 border">
-        <p class="text-xs text-gray-500 mb-1">Username</p>
-        <p class="font-medium text-gray-800">
-          asep_uhuy
+          {{ user.phone }}
         </p>
       </div>
 
