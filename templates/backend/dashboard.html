@@ -1,0 +1,176 @@
+{% extends 'backend/index.html' %}
+{% block content %}
+
+<!-- ===== HEADER ===== -->
+<div class="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+        <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
+            Dashboard
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">
+            Selamat datang,
+            <span class="font-semibold text-blue-600">
+                {{ user.username }}
+            </span>
+        </p>
+    </div>
+
+    <div class="px-4 py-2 rounded-2xl text-sm text-white shadow
+                bg-gradient-to-r from-blue-500 to-indigo-600
+                flex items-center gap-2">
+        <i class="fa fa-palette opacity-80"></i>
+        Creative Space
+    </div>
+</div>
+
+<!-- ===== ADMIN : SYSTEM OVERVIEW ===== -->
+{% if user.role == 'admin' %}
+<h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">
+    System Overview
+</h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+    <!-- USERS -->
+    <div class="relative bg-white rounded-2xl p-6 shadow hover:shadow-xl transition overflow-hidden">
+        <div class="absolute right-4 top-4 text-6xl opacity-10 text-green-500">
+            <i class="fa fa-users"></i>
+        </div>
+        <p class="text-xs text-gray-400 uppercase">Total User</p>
+        <h3 class="text-3xl font-extrabold text-gray-800 mt-2">
+            {{ data.total_users }}
+        </h3>
+        <div class="mt-4 h-1 w-10 bg-green-500 rounded"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="relative bg-white rounded-2xl p-6 shadow hover:shadow-xl transition overflow-hidden">
+        <div class="absolute right-4 top-4 text-6xl opacity-10 text-blue-500">
+            <i class="fa fa-image"></i>
+        </div>
+        <p class="text-xs text-gray-400 uppercase">Total Konten</p>
+        <h3 class="text-3xl font-extrabold text-gray-800 mt-2">
+            {{ data.total_content }}
+        </h3>
+        <div class="mt-4 h-1 w-10 bg-blue-500 rounded"></div>
+    </div>
+
+    <!-- WEB RATING -->
+    <div class="relative bg-white rounded-2xl p-6 shadow hover:shadow-xl transition overflow-hidden">
+        <div class="absolute right-4 top-4 text-6xl opacity-10 text-yellow-400">
+            <i class="fa fa-star"></i>
+        </div>
+
+        <p class="text-xs text-gray-400 uppercase">
+            Rating Website
+        </p>
+
+        <h3 class="text-3xl font-extrabold text-gray-800 mt-2">
+            {{ data.avg_web_rating }}/5
+        </h3>
+
+        <p class="text-xs text-gray-500 mt-1">
+            dari {{ data.total_feedback }} feedback
+        </p>
+
+        <div class="mt-4 h-1 w-10 bg-yellow-400 rounded"></div>
+    </div>
+
+
+</div>
+{% endif %}
+
+<!-- ===== PERSONAL PERFORMANCE ===== -->
+<h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">
+    My Performance
+</h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+    <!-- MY CONTENT -->
+    <div class="rounded-2xl p-6 text-white shadow
+                bg-gradient-to-br from-blue-500 to-blue-600">
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-xs opacity-80">Karya Saya</p>
+                <h3 class="text-4xl font-extrabold mt-1">
+                    {{ data.my_content }}
+                </h3>
+            </div>
+            <i class="fa fa-image text-4xl opacity-30"></i>
+        </div>
+    </div>
+
+    <!-- AVG RATING -->
+    <div class="rounded-2xl p-6 text-white shadow
+                bg-gradient-to-br from-yellow-400 to-orange-500">
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-xs opacity-80">
+                    {% if user.role == 'admin' %}
+                    Avg Rating Saya
+                    {% else %}
+                    Avg Rating
+                    {% endif %}
+                </p>
+                <h3 class="text-4xl font-extrabold mt-1">
+                    {% if user.role == 'admin' %}
+                    {{ data.my_avg_rating }}
+                    {% else %}
+                    {{ data.avg_rating }}
+                    {% endif %}
+                </h3>
+            </div>
+            <i class="fa fa-star text-4xl opacity-30"></i>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== ACTIVITY ===== -->
+<div class="bg-white rounded-2xl shadow p-6">
+    <h3 class="font-semibold mb-5 flex items-center gap-2 text-gray-700">
+        <i class="fa fa-clock text-blue-500"></i>
+        Karya Terbaru Saya
+    </h3>
+
+    <ul class="space-y-3 text-sm">
+
+        {% if user.role == 'admin' %}
+        {% for c in data.my_latest_content %}
+        <li class="flex justify-between items-center px-4 py-3 rounded-xl
+                       hover:bg-gray-50 transition">
+            <span class="truncate font-medium text-gray-700">
+                {{ c.title }}
+            </span>
+            <span class="text-xs text-gray-400">
+                {{ c.created_at }}
+            </span>
+        </li>
+        {% else %}
+        <li class="text-center text-gray-400 py-6">
+            Belum upload karya ✨
+        </li>
+        {% endfor %}
+        {% else %}
+        {% for c in data.latest_my_content %}
+        <li class="flex justify-between items-center px-4 py-3 rounded-xl
+                       hover:bg-gray-50 transition">
+            <span class="truncate font-medium text-gray-700">
+                {{ c.title }}
+            </span>
+            <span class="text-xs text-gray-400">
+                {{ c.created_at }}
+            </span>
+        </li>
+        {% else %}
+        <li class="text-center text-gray-400 py-6">
+            Belum upload karya ✨
+        </li>
+        {% endfor %}
+        {% endif %}
+
+    </ul>
+</div>
+
+{% endblock %}

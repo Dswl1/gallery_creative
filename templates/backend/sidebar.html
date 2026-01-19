@@ -1,49 +1,80 @@
 <aside id="sidebar" class="fixed top-16 left-0 z-50
-         w-64 h-[calc(100vh-4rem)]
-         bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)]
-         backdrop-blur-xl border-r border-white/30
-         p-5
-         transform -translate-x-full sm:translate-x-0
-         transition-transform duration-300 ease-in-out">
+    w-64 h-[calc(100vh-4rem)]
+    bg-[radial-gradient(circle_at_top,_#36d7f3,_#0696ff)]
+    backdrop-blur-xl border-r border-white/30
+    px-5 py-6
+    transform -translate-x-full sm:translate-x-0
+    transition-transform duration-300 ease-in-out">
 
+  <nav class="space-y-1 text-white">
 
-  <nav class="sm:mt-4 space-y-1 text-white ">
+    <!-- DASHBOARD -->
+    <a href="{{ url_for('dashboard') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold
+              {% if request.endpoint == 'dashboard' %} bg-white/25 {% endif %}">
+      <i class="fa fa-gauge-high text-lg group-hover:scale-110 transition"></i>
+      Dashboard
+    </a>
 
     <!-- PROFILE -->
-    <a href="{{ url_for('dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl
-             hover:bg-white/20 transition font-semibold">
-      <i class="fa fa-user"></i> Profile
+    <a href="{{ url_for('profile') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold
+              {% if request.endpoint == 'profile' %} bg-white/25 {% endif %}">
+      <i class="fa fa-user text-lg"></i>
+      Profile
     </a>
 
-    {% if session ['role'] == 'admin' %}
-    <a href="{{ url_for('admin_users') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl
-             hover:bg-white/20 transition font-semibold">
-      <i class="fa fa-users"></i> Kelola Akun
+    {% if session.get('role') == 'admin' %}
+    <!-- ADMIN LABEL -->
+    <p class="mt-6 mb-2 text-xs uppercase tracking-wider text-white/70">
+      Admin Panel
+    </p>
+
+    <a href="{{ url_for('admin_users') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-users"></i>
+      Kelola Akun
     </a>
 
-    <a href="{{ url_for('dashboard_content') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl
-             hover:bg-white/20 transition font-semibold">
-      <i class="fa fa-image"></i> Semua Konten
+    <a href="{{ url_for('dashboard_content', mode='all') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-images"></i>
+      Semua Konten
     </a>
 
-    <a href="{{ url_for('dashboard_content') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl
-             hover:bg-white/20 transition font-semibold">
-      <i class="fa fa-folder-open"></i> Konten Saya
+    <a href="{{ url_for('dashboard_content') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-folder-open"></i>
+      Konten Saya
+    </a>
+
+    <a href="{{ url_for('admin_feedback') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-star text-yellow-300"></i>
+      Feedback Web
     </a>
     {% endif %}
 
-    {% if session['role'] == 'user' %}
-    <a href="{{ url_for('dashboard_content') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl
-             hover:bg-white/20 transition font-semibold">
-      <i class="fa fa-folder-open"></i> Konten Saya
+    {% if session.get('role') == 'user' %}
+    <!-- USER LABEL -->
+    <p class="mt-6 mb-2 text-xs uppercase tracking-wider text-white/70">
+      My Workspace
+    </p>
+
+    <a href="{{ url_for('dashboard_content') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+              hover:bg-white/20 transition font-semibold">
+      <i class="fa fa-folder-open"></i>
+      Konten Saya
     </a>
     {% endif %}
 
     <!-- LOGOUT -->
     <div class="mt-10 border-t border-white/30 pt-4">
-      <a href="{{ url_for('logout') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl
-               text-red-200 hover:bg-red-500 hover:text-white transition font-semibold">
-        <i class="fa fa-sign-out-alt"></i> Logout
+      <a href="{{ url_for('logout') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl
+                text-red-200 hover:bg-red-500 hover:text-white
+                transition font-semibold">
+        <i class="fa fa-right-from-bracket"></i>
+        Logout
       </a>
     </div>
 

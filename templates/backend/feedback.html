@@ -1,0 +1,86 @@
+{% extends 'backend/index.html' %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="mb-10">
+    <h1 class="text-2xl font-bold text-gray-800">
+        Feedback Pengguna
+    </h1>
+    <p class="text-sm text-gray-500">
+        Masukan & penilaian pengguna terhadap website
+    </p>
+</div>
+
+<!-- STATS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 max-w-2xl">
+
+    <div class="bg-white rounded-2xl p-5 shadow flex items-center gap-4">
+        <div class="w-11 h-11 rounded-full bg-yellow-100 flex items-center justify-center text-lg">
+            ⭐
+        </div>
+        <div>
+            <p class="text-xs text-gray-500">Avg Rating</p>
+            <p class="text-2xl font-bold">
+                {{ avg_rating }}<span class="text-sm text-gray-400">/5</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-5 shadow flex items-center gap-4">
+        <div class="w-11 h-11 rounded-full bg-purple-100 flex items-center justify-center text-lg">
+            💬
+        </div>
+        <div>
+            <p class="text-xs text-gray-500">Total Feedback</p>
+            <p class="text-2xl font-bold">{{ total_feedback }}</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- FEEDBACK LIST -->
+<div class="space-y-6">
+
+    {% for f in feedbacks %}
+    <div class="bg-white rounded-2xl shadow p-6">
+
+        <!-- HEADER -->
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
+
+            <div>
+                <p class="font-semibold text-gray-800">
+                    {{ f.username or 'Anonymous' }}
+                </p>
+                <p class="text-xs text-gray-400">
+                    {{ f.created_at }}
+                </p>
+            </div>
+
+            <span class="w-fit px-3 py-1 text-xs rounded-full font-semibold
+                {% if f.type == 'bug' %} bg-red-100 text-red-600
+                {% elif f.type == 'saran' %} bg-sky-100 text-sky-600
+                {% else %} bg-green-100 text-green-600 {% endif %}">
+                {{ f.type|capitalize }}
+            </span>
+
+        </div>
+
+        <!-- MESSAGE -->
+        <p class="text-sm text-gray-600 leading-relaxed mb-4">
+            {{ f.message }}
+        </p>
+
+        <!-- RATING -->
+        <div class="flex items-center gap-1 text-yellow-400 text-base">
+            {% for i in range(f.rating) %}★{% endfor %}
+            {% for i in range(5 - f.rating) %}☆{% endfor %}
+        </div>
+
+    </div>
+    {% else %}
+    <p class="text-gray-400 text-sm">Belum ada feedback</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

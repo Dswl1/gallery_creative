@@ -11,10 +11,11 @@
       <div class="relative">
         <img src="
         {% if user.profile %}
-          {{ url_for('static', filename='assets/' ~ user.profile) }}
-       {% else %}
+          {{ url_for('static', filename='profile/' ~ user.profile) }}
+        {% else %}
           {{ url_for('static', filename='assets/profile.png') }}
-       {% endif %}" class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
+        {% endif %}"
+        class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
         <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
       </div>
 
@@ -63,7 +64,7 @@
     <!-- ACTION -->
     <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-end">
 
-      <a href="{{ url_for('update_users') }}">
+      <a href="{{ url_for('profile_edit') }}">
         <button class="w-full sm:w-auto px-6 py-3 rounded-xl
                        bg-blue-500 text-white font-semibold
                        hover:bg-blue-600 hover:shadow-lg
@@ -72,7 +73,7 @@
         </button>
       </a>
 
-      <form action="{{ url_for('delete_own_account') }}" method="POST"
+      <form action="{{ url_for('profile_delete') }}" method="POST"
         onsubmit="return confirm('Akun akan dihapus permanen. Lanjutkan?')">
         <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl
                  bg-red-500/10 text-red-600 font-semibold

@@ -3,91 +3,197 @@
 Gallery Creative | Details
 {% endblock %}
 
-{% block content%}
-<!-- SECTION DETAIL -->
+{% block content %}
 <section class="max-w-7xl mx-auto px-6 pt-28 pb-20">
 
     <!-- BREADCRUMB -->
     <div class="flex items-center gap-2 text-sm text-gray-500 mb-10">
-        <a href="{{ url_for('index') }}" class="hover:text-blue-500 transition">
-            Home
-        </a>
+        <a href="{{ url_for('index') }}" class="hover:text-blue-500 transition">Home</a>
         <span>/</span>
         <span class="text-gray-800 font-semibold">Detail Karya</span>
     </div>
 
-    <!-- GRID -->
+    <!-- TOP GRID -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-        <!-- IMAGE SHOWCASE -->
-        <div class="relative group">
+        <!-- IMAGE -->
+        <div class="relative">
             <div class="absolute inset-0 bg-blue-400/20 blur-3xl rounded-3xl"></div>
-            <img src="{{ url_for('static', filename='assets/content1.jpg') }}" class="relative w-full max-w-xl mx-auto
-                       rounded-3xl shadow-2xl
-                       transition-transform duration-500
-                       group-hover:scale-[1.03]" alt="Karya">
+            <img src="{{ url_for('static', filename='uploads/' ~ image.filename) }}"
+                class="relative w-full max-w-xl mx-auto rounded-3xl shadow-2xl" alt="Karya">
         </div>
 
         <!-- CONTENT -->
-        <div class="space-y-10">
+        <div class="space-y-8 self-start">
 
             <!-- TITLE -->
             <div>
                 <h1 class="text-3xl font-extrabold text-gray-900 mb-2">
-                    Perjalanan Berdebu
+                    {{ image.title }}
                 </h1>
-                <p class="text-gray-500">
-                    Ilustrasi • Dipublikasikan 27 Oktober 2025
+
+                <p class="text-gray-500 text-sm">
+                    {{ image.category }} • {{ image.created_at }}
                 </p>
             </div>
 
             <!-- INFO CARD -->
-            <div class="bg-white rounded-3xl p-6
-                        shadow-lg border border-gray-100">
+            <div class="bg-white rounded-3xl p-6 shadow-lg border">
                 <h2 class="text-lg font-semibold text-blue-600 mb-4">
                     Informasi Karya
                 </h2>
 
                 <div class="grid grid-cols-2 gap-4 text-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fas fa-tag text-blue-500"></i>
-                        <span>Ilustrasi</span>
+                        <i class="fas fa-user text-blue-500"></i>
+                        <span>{{ image.username }}</span>
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <i class="fas fa-user text-blue-500"></i>
-                        <span>John Doe</span>
+                        <i class="fas fa-tag text-blue-500"></i>
+                        <span>{{ image.category }}</span>
                     </div>
 
                     <div class="flex items-center gap-3">
                         <i class="fas fa-calendar text-blue-500"></i>
-                        <span>27 Oktober 2025</span>
+                        <span>{{ image.created_at }}</span>
                     </div>
 
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-image text-blue-500"></i>
-                        <span>JPEG / PNG</span>
-                    </div>
                 </div>
             </div>
 
             <!-- DESCRIPTION -->
-            <div class="bg-white/70 backdrop-blur
-                        rounded-3xl p-6 border border-gray-100">
-                <h3 class="text-lg font-semibold text-gray-900 mb-3">
-                    Deskripsi
-                </h3>
+            <div class="bg-white/80 backdrop-blur rounded-3xl p-6 border">
+                <h3 class="text-lg font-semibold mb-3">Deskripsi</h3>
                 <p class="text-gray-700 leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quis eos dolorem inventore commodi labore quia voluptatibus
-                    non dicta, nihil perferendis repudiandae officiis neque
-                    suscipit officia. Voluptatem tempora deleniti numquam
-                    expedita.
+                    {{ image.description }}
                 </p>
             </div>
 
         </div>
     </div>
+
+    <!-- RATING & COMMENT SECTION -->
+    <div class="bg-white rounded-3xl p-8 shadow-xl border my-6">
+        {% if not session.user_id %}
+        <p class="text-sm text-gray-500">
+            <a href="{{ url_for('login') }}" class="text-blue-500 hover:underline">
+                Login
+            </a> untuk memberi rating & komentar
+        </p>
+        {% else %}
+
+
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+            <i class="fa fa-star text-yellow-400"></i>
+            Rating & Komentar
+        </h3>
+
+        <!-- ===== FORM RATING ===== -->
+
+        <div class="mb-8">
+            <p class="text-sm font-semibold text-gray-700 mb-2">
+                Beri Rating
+            </p>
+
+            <div id="ratingStars" class="flex flex-row-reverse justify-end gap-1 text-3xl cursor-pointer">
+                {% for i in range(5,0,-1) %}
+                <i class="fa fa-star text-gray-300 star" data-value="{{ i }}"></i>
+                {% endfor %}
+            </div>
+
+            <p class="text-sm text-gray-500 mt-2">
+                Rating:
+                <span id="avgRating">
+                    {{ rating.avg_rating|round(1) if rating.avg_rating else 0 }}
+                </span> / 5
+                (<span id="totalRating">{{ rating.total_rating or 0 }}</span>)
+            </p>
+        </div>
+
+
+        <hr class="my-6">
+
+        <!-- ===== FORM KOMENTAR ===== -->
+        <form action="{{ url_for('comment_content', id=image.id) }}" method="post" class="space-y-4">
+
+            <p class="text-sm font-semibold text-gray-700">
+                Komentar
+            </p>
+
+            <textarea name="comment" rows="3" required
+                class="w-full p-4 rounded-xl border focus:ring-2 focus:ring-blue-400"
+                placeholder="Tulis komentar..."></textarea>
+
+            <button type="submit" class="px-6 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600">
+                Kirim Komentar
+            </button>
+        </form>
+        {% endif %}
+
+        <div class="space-y-4 mt-8">
+            {% for c in comments %}
+            <div class="bg-white rounded-2xl p-4 border shadow-sm">
+                <div class="flex justify-between mb-1">
+                    <strong>{{ c.username }}</strong>
+                    <small class="text-gray-400">{{ c.created_at }}</small>
+                </div>
+                <p class="text-gray-700 text-sm">
+                    {{ c.comment }}
+                </p>
+            </div>
+            {% else %}
+            <p class="text-gray-500 text-sm">Belum ada komentar</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
 </section>
+
+<script>
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', async () => {
+            const rating = star.dataset.value;
+
+            const res = await fetch('/content/{{ image.id }}/rate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({ rating })
+            });
+
+            if (res.status === 403) {
+                alert('Login dulu');
+                return;
+            }
+
+            const data = await res.json();
+
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+
+            document.getElementById('avgRating').innerText = data.avg;
+            document.getElementById('totalRating').innerText = data.total;
+
+            document.querySelectorAll('.star').forEach(s => {
+                s.classList.toggle(
+                    'text-yellow-400',
+                    s.dataset.value <= rating
+                );
+                s.classList.toggle(
+                    'text-gray-300',
+                    s.dataset.value > rating
+                );
+            });
+        });
+    });
+</script>
+
+
 
 {% endblock %}

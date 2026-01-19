@@ -104,36 +104,48 @@
 
     <!-- SEARCH & SORT -->
     <div class="mb-16">
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4
-                   bg-white/70 backdrop-blur-md
-                   border border-gray-200
-                   rounded-2xl p-4 shadow-md">
+        <div class="max-w-5xl mx-auto px-4">
 
-            <!-- SEARCH -->
-            <div class="relative md:col-span-2">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                </i>
-                <input id="searchInput" type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-xl border border-gray-200
-                           px-5 py-3 pl-11 text-sm
-                           focus:outline-none focus:ring-2 focus:ring-[#0696ff]
-                           transition" />
+            <div class="flex flex-col md:flex-row gap-4 items-center">
+
+                <!-- SEARCH -->
+                <div class="relative w-full md:flex-1">
+                    <input id="searchInput" type="text" placeholder="Cari karya atau kreator..." class="w-full rounded-2xl bg-white/90 backdrop-blur
+                           border border-gray-200
+                           px-5 py-4 pr-12 text-sm
+                           shadow-lg
+                           focus:outline-none focus:ring-2 focus:ring-[#0696ff]/40
+                           transition-all duration-300" />
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+
+                <!-- SORT -->
+                <div class="relative">
+                    <select id="sortSelect" class="appearance-none rounded-2xl bg-white/90 backdrop-blur
+                           border border-gray-200
+                           px-5 py-4 pr-10 text-sm
+                           shadow-lg cursor-pointer
+                           focus:outline-none focus:ring-2 focus:ring-[#0696ff]/40
+                           transition-all duration-300">
+                        <option value="latest">🆕 Terbaru</option>
+                        <option value="popular">🔥 Populer</option>
+                        <option value="az">A–Z</option>
+                        <option value="za">Z–A</option>
+                    </select>
+
+                    <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </span>
+                </div>
+
             </div>
-
-            <!-- SORT -->
-            <select id="sortSelect" class="w-full rounded-xl border border-gray-200 px-4 py-3
-                       text-sm text-gray-600
-                       focus:outline-none focus:ring-2 focus:ring-[#0696ff]
-                       transition cursor-pointer">
-                <option value="latest">Terbaru</option>
-                <option value="popular">Terpopuler</option>
-                <option value="az">A–Z</option>
-                <option value="za">Z–A</option>
-            </select>
         </div>
     </div>
 
     <!-- GRID -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div id="contentGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
         <!-- CARD -->
         {% for img in contents %}
@@ -143,48 +155,143 @@
 
             <!-- IMAGE -->
             <div class="overflow-hidden">
-                <img src="{{ url_for('static', filename='assets/' ~ img.filename) }}" class="w-full h-56 object-cover
-            transition-transform duration-700 group-hover:scale-110" alt="{{ img.title }}">
+                <img src="{{ url_for('static', filename='uploads/' ~ img.filename) }}" class="w-full h-56 object-cover
+            transition-transform duration-700 group-hover:scale-110" loading="lazy" alt="{{ img.title }}">
 
             </div>
 
             <!-- OVERLAY -->
             <div class="absolute inset-0 bg-gradient-to-t
-                       from-black/70 via-black/20 to-transparent
-                       opacity-0 group-hover:opacity-100
-                       transition-opacity duration-500">
+           from-black/70 via-black/20 to-transparent
+           opacity-0 group-hover:opacity-100
+           transition-opacity duration-500
+           pointer-events-none">
 
-                <div class="absolute bottom-0 w-full px-4 py-4 flex justify-between items-end">
+    <div class="absolute bottom-0 w-full px-4 py-4 flex justify-between items-end">
 
-                    <!-- INFO -->
-                    <div class="text-white">
-                        <h3 class="font-semibold text-sm md:text-base">
-                            {{ img.title }}
-                        </h3>
-                        <p class="text-xs text-gray-300">
-                            {{ img.username }}
-                        </p>
-                    </div>
-
-                    <!-- ACTION -->
-                    <div class="flex gap-3 text-lg text-white">
-                        <button class="zoom-btn hover:text-[#0696ff] transition"
-                            data-img="{{ url_for('static', filename='assets/' ~ img.filename) }}">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <a href="{{ url_for('detail', id=img.id) }}" class="hover:text-[#0696ff] transition">
-                            <i class="fas fa-link"></i>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
+        <div class="text-white">
+            <h3 class="font-semibold text-sm md:text-base">
+                {{ img.title }}
+            </h3>
+            <p class="text-xs text-gray-300">
+                {{ img.username }}
+            </p>
         </div>
-        {% endfor %}
+
+        <div class="flex gap-3 text-lg text-white pointer-events-auto">
+            <button class="zoom-btn hover:text-[#0696ff] transition"
+                data-img="{{ url_for('static', filename='uploads/' ~ img.filename) }}">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <a href="{{ url_for('detail', id=img.id) }}"
+               class="hover:text-[#0696ff] transition">
+                <i class="fas fa-link"></i>
+            </a>
+        </div>
 
     </div>
+</div>
+
+        </div>
+        {% endfor %}
+    </div>
+    <div id="pagination" class="flex justify-center gap-4 mt-12">
+        <button id="prevBtn" class="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50">
+            ← Prev
+        </button>
+
+        <span id="pageInfo" class="px-4 py-2 text-gray-600"></span>
+
+        <button id="nextBtn" class="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50">
+            Next →
+        </button>
+    </div>
+
+
 </section>
 
+
+<section id="feedback" class="relative max-w-7xl mx-auto px-6 py-20">
+
+    <!-- HEADER -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block mb-3 px-4 py-1 text-sm font-semibold
+                     rounded-full bg-sky-100 text-sky-700">
+            💬 Feedback
+        </span>
+
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            Bantu Kami <span class="text-[#0696ff]">Jadi Lebih Baik</span>
+        </h2>
+
+        <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+            Punya saran, kritik, atau pengalaman menarik?
+            Kami ingin mendengarnya langsung dari kamu.
+        </p>
+    </div>
+
+    <!-- FORM -->
+    <div class="max-w-3xl mx-auto bg-white/70 backdrop-blur
+                border border-gray-200 rounded-3xl p-8 shadow-lg">
+
+        {% if session.user_id %}
+        <form action="{{ url_for('submit_feedback') }}" method="post" class="space-y-6">
+
+            <!-- RATING -->
+            <div>
+                <p class="text-sm font-semibold text-gray-700 mb-2">Rating Website</p>
+                <div class="flex flex-row-reverse justify-end gap-1 text-3xl">
+                    {% for i in range(5,0,-1) %}
+                    <input type="radio" id="rate{{ i }}" name="rating" value="{{ i }}" class="hidden peer">
+                    <label for="rate{{ i }}"
+                        class="cursor-pointer text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-400 transition">
+                        ★
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- TYPE -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    Jenis Masukan
+                </label>
+                <select name="type" required class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm
+                           focus:ring-2 focus:ring-[#0696ff] focus:outline-none">
+                    <option value="">Pilih</option>
+                    <option value="bug">🐞 Bug / Error</option>
+                    <option value="suggestion">💡 Saran</option>
+                    <option value="appreciation">❤️ Apresiasi</option>
+                </select>
+            </div>
+
+            <!-- MESSAGE -->
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    Pesan
+                </label>
+                <textarea name="message" rows="4" required class="w-full rounded-xl border border-gray-200 p-4 text-sm
+                           focus:ring-2 focus:ring-[#0696ff] focus:outline-none"
+                    placeholder="Tulis masukan kamu di sini..."></textarea>
+            </div>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="w-full py-3 rounded-xl bg-[#0696ff] text-white font-semibold
+                       hover:bg-blue-600 transition">
+                Kirim Feedback
+            </button>
+
+        </form>
+        {% else %}
+        <p class="text-center text-sm text-gray-500">
+            <a href="{{ url_for('login') }}" class="text-[#0696ff] font-semibold hover:underline">
+                Login
+            </a>
+            untuk mengirim feedback
+        </p>
+        {% endif %}
+    </div>
+</section>
 
 
 <section id="team" class="py-24">
@@ -338,5 +445,6 @@
         </div>
     </div>
 </section>
+
 
 {% endblock %}

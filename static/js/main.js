@@ -48,23 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// SWEETALERT
-function confirmDelete() {
+function confirmDelete(el) {
+  const id = el.dataset.id;
+
   Swal.fire({
-    title: 'Yakin hapus akun?',
-    text: 'Akun akan dihapus permanen!',
-    icon: 'warning',
+    title: "Yakin hapus konten?",
+    text: "Konten akan dihapus permanen!",
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: '#ef4444',
-    cancelButtonColor: '#6b7280',
-    confirmButtonText: 'Ya, hapus',
-    cancelButtonText: 'Batal'
-  }).then((result) => {
+    confirmButtonText: "Ya, hapus",
+    cancelButtonText: "Batal"
+  }).then(function (result) {
     if (result.isConfirmed) {
-      document.getElementById('deleteForm').submit();
+      document.getElementById("deleteForm-" + id).submit();
     }
   });
 }
+
 
 function saveChange(event) {
   event.preventDefault();
@@ -156,3 +156,52 @@ function previewImage(event) {
   }
   reader.readAsDataURL(event.target.files[0]);
 }
+
+
+
+let page = 1;
+let loading = false;
+
+const grid   = document.getElementById('contentGrid');
+const btn    = document.getElementById('loadMore');
+const search = document.getElementById('searchInput');
+const sort   = document.getElementById('sortSelect');
+
+async function loadContent(reset = false) {
+    if (loading) return;
+    loading = true;
+
+    if (reset) {
+        page = 1;
+        grid.innerHTML = '';
+        btn.style.display = 'block';
+    }
+
+    const q = search.value;
+    const s = sort.value;
+
+    const res = await fetch(`/content/load?page=${page}&q=${q}&sort=${s}`);
+    const html = await res.text();
+
+    if (html.trim() === '') {
+        btn.style.display = 'none';
+    } else {
+        grid.insertAdjacentHTML('beforeend', html);
+        page++;
+    }
+
+    loading = false;
+}
+
+// LOAD MORE
+btn.addEventListener('click', () => loadContent());
+
+// SEARCH (debounce)
+let t;
+search.addEventListener('input', () => {
+    clearTimeout(t);
+    t = setTimeout(() => loadContent(true), 400);
+});
+
+// SORT
+sort.addEventListener('change', () => loadContent(true));

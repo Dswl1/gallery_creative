@@ -1,33 +1,69 @@
 <header class="sticky top-0 z-40 h-16
-         flex justify-between items-center
-         bg-[radial-gradient(circle_at_center,_#36d7f3,_#0696ff)]
-         backdrop-blur-md px-6
-         border-b border-white/20 shadow-md">
-
+    flex items-center justify-between
+    bg-[radial-gradient(circle_at_top,_#36d7f3,_#0696ff)]
+    backdrop-blur-xl
+    px-6
+    border-b border-white/20
+    shadow-md">
 
   <!-- LEFT -->
   <div class="flex items-center gap-4">
 
-    <!-- Sidebar Toggle (Mobile) -->
-    <button id="menuBtn" class="sm:hidden text-white text-2xl focus:outline-none">
+    <!-- TOGGLE -->
+    <button id="menuBtn" class="sm:hidden text-white text-2xl hover:scale-110 transition">
       <i class="fa fa-bars"></i>
     </button>
+    
 
-    <!-- Logo -->
-    <img src="{{ url_for('static', filename='assets/logo.png') }}" class="w-10 drop-shadow" alt="Logo">
+    <!-- LOGO -->
+    <a href="{{ url_for('index') }}" class="flex items-center gap-3 group">
 
-    <!-- Title -->
-    <a href="{{ url_for('index') }}" class="text-white font-bold text-lg tracking-wide hover:text-blue-200 transition">
-      Dashboard
+      <div class="w-10 h-10 rounded-xl bg-white/20
+                  flex items-center justify-center
+                  shadow group-hover:scale-105 transition">
+        <img src="{{ url_for('static', filename='assets/logo.png') }}" class="w-6 drop-shadow" alt="Logo">
+      </div>
+
+      <div class="hidden sm:block">
+        <h1 class="text-white font-extrabold tracking-wide leading-tight">
+          Gallery<span class="text-yellow-300">Creative</span>
+        </h1>
+        <p class="text-xs text-white/70">
+          {% if session.get('role') == 'admin' %}
+          Admin Dashboard
+          {% else %}
+          User Dashboard
+          {% endif %}
+        </p>
+      </div>
     </a>
   </div>
 
   <!-- RIGHT -->
   {% if 'username' in session %}
-  <div class="flex items-center gap-3 bg-white/20 px-4 py-2 rounded-xl
-           text-white shadow-sm">
-    <i class="fa fa-user-circle text-lg"></i>
-    <span class="font-medium">{{ session['username'] }}</span>
+  <div class="flex items-center gap-3">
+
+    <!-- ROLE BADGE -->
+    <span class="hidden sm:inline-block text-xs font-semibold px-3 py-1 rounded-full
+        {% if session.get('role') == 'admin' %}
+          bg-red-500/20 text-red-100
+        {% else %}
+          bg-white/20 text-white
+        {% endif %}">
+      {{ session.get('role')|capitalize }}
+    </span>
+
+    <!-- USER -->
+    <div class="flex items-center gap-3
+        bg-white/20 px-4 py-2 rounded-xl
+        text-white shadow hover:bg-white/30 transition">
+
+      <i class="fa fa-user-circle text-xl"></i>
+      <span class="font-semibold text-sm">
+        {{ session['username'] }}
+      </span>
+    </div>
+
   </div>
   {% endif %}
 </header>

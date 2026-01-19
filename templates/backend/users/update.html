@@ -8,7 +8,7 @@
     <!-- HEADER -->
     <div class="relative w-36 h-36 mx-auto rounded-full overflow-hidden group">
       <img id="preview" src="{% if user.profile %}
-              {{ url_for('static', filename='assets/' ~ user.profile) }}
+              {{ url_for('static', filename='uploads/' ~ user.profile) }}
             {% else %}
               {{ url_for('static', filename='assets/profile.png') }}
             {% endif %}" class="w-full h-full object-cover">
@@ -25,7 +25,7 @@
 
 
     <!-- FORM -->
-    <form action="{{ url_for('update_users') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ url_for('profile_edit') }}" method="POST" enctype="multipart/form-data">
 
       <input type="file" id="profile" name="profile" accept="image/*" class="hidden" onchange="previewImage(event)">
       <!-- GRID -->
@@ -71,7 +71,7 @@
       <!-- ACTION -->
       <div class="pt-6 flex justify-end gap-4">
 
-        <a href="{{ url_for('dashboard') }}" class="px-6 py-3 rounded-xl border border-gray-300
+        <a href="{{ url_for('admin_users') }}" class="px-6 py-3 rounded-xl border border-gray-300
                   text-gray-600 hover:bg-gray-100 transition">
           Batal
         </a>

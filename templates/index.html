@@ -58,7 +58,119 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const contentGrid = document.getElementById('contentGrid');
 
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageInfo = document.getElementById('pageInfo');
+
+        let currentPage = 1;
+        let totalPages = 1;
+        const limit = 12;
+        let debounceTimer;
+
+        /* FETCH */
+        function fetchContents() {
+            const search = searchInput.value;
+            const sort = sortSelect.value;
+
+            fetch(`/api/contents?search=${encodeURIComponent(search)}&sort=${sort}&page=${currentPage}&limit=${limit}`)
+                .then(res => res.json())
+                .then(data => {
+                    renderContents(data.items);
+
+                    totalPages = Math.ceil(data.total / limit);
+                    pageInfo.textContent = `Page ${currentPage} / ${totalPages}`;
+
+                    prevBtn.disabled = currentPage === 1;
+                    nextBtn.disabled = currentPage === totalPages;
+                });
+        }
+
+        /* RENDER */
+        function renderContents(data) {
+            contentGrid.innerHTML = '';
+
+            if (data.length === 0) {
+                contentGrid.innerHTML = `
+            <div class="col-span-full text-center text-gray-500">
+                Tidak ada karya ditemukan
+            </div>
+        `;
+                return;
+            }
+
+            data.forEach(img => {
+                contentGrid.innerHTML += `
+        <a href="/detail/${img.id}" class="group relative block overflow-hidden rounded-2xl
+            bg-white shadow-lg hover:shadow-2xl
+            transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+
+            <div class="overflow-hidden">
+                <img src="/static/uploads/${img.filename}" class="w-full h-56 object-cover
+                     transition-transform duration-700 group-hover:scale-110" alt="${img.title}">
+            </div>
+
+            <div class="absolute inset-0 bg-gradient-to-t
+                from-black/70 via-black/20 to-transparent
+                opacity-0 group-hover:opacity-100
+                transition-opacity duration-500 pointer-events-none">
+
+                <div class="absolute bottom-0 w-full px-4 py-4">
+                    <h3 class="text-white font-semibold text-sm md:text-base">${img.title}</h3>
+                    <p class="text-xs text-gray-300">${img.username}</p>
+                </div>
+
+            </div>
+        </a>
+        `;
+            });
+        }
+
+        /* EVENTS */
+        function scrollToContent() {
+            document.getElementById('content').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        prevBtn.onclick = () => {
+            if (currentPage > 1) {
+                currentPage--;
+                fetchContents();
+                scrollToContent();
+            }
+        };
+
+        nextBtn.onclick = () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                fetchContents();
+                scrollToContent();
+            }
+        };
+
+
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                currentPage = 1;
+                fetchContents();
+            }, 300);
+        });
+
+        sortSelect.addEventListener('change', () => {
+            currentPage = 1;
+            fetchContents();
+        });
+
+        /* LOAD AWAL */
+        fetchContents();
+    </script>
 </body>
 
 </html>

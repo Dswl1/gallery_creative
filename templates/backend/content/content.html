@@ -1,13 +1,37 @@
 {% extends 'backend/index.html' %}
 {% block content %}
-<h2 class="text-2xl font-semibold text-center mb-3">Konten Saya</h2>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
 
-<div class="flex justify-end mb-3">
-    <a href="{{ url_for('create_content') }}"
-        class="bg-blue-500 px-4 py-2 rounded-md text-white hover:bg-blue-600 transition">
-        Upload Konten
-    </a>
+    <div>
+        <h2 class="text-2xl font-extrabold text-gray-800">
+            {% if session.role == 'admin' and request.args.get('mode') == 'all' %}
+            Semua Konten
+            {% else %}
+            Konten Saya
+            {% endif %}
+        </h2>
+
+        <p class="text-sm text-gray-500">
+            {% if session.role == 'admin' and request.args.get('mode') == 'all' %}
+            Daftar seluruh konten yang diupload oleh semua user
+            {% else %}
+            Kelola dan pantau karya yang sudah kamu upload
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="flex gap-3 mt-4 sm:mt-0">
+        <a href="{{ url_for('create_content') }}" class="inline-flex items-center gap-2
+              bg-blue-500 px-5 py-2.5 rounded-xl
+              text-white font-semibold
+              hover:bg-blue-600 hover:shadow-lg transition">
+            <i class="fa fa-cloud-upload-alt"></i>
+            Upload Konten
+        </a>
+    </div>
+
 </div>
+
 
 <!-- TABLE -->
 <div class="datatable-container">
@@ -29,12 +53,12 @@
                 <td class="text-center">{{ loop.index }}</td>
 
                 <td class="text-center">
-                    <img src="{{ url_for('static', filename='assets/' ~ img.filename) }}"
+                    <img src="{{ url_for('static', filename='uploads/' ~ img.filename) }}"
                         onerror="this.src='/static/img/placeholder.png'" class="dt-thumb mx-auto" alt="Thumbnail">
                 </td>
 
                 <td>{{ img.title }}</td>
-                <td>{{ session.username }}</td>
+                <td>{{ img.username }}</td>
                 <td>{{ img.created_at.strftime('%d-%m-%Y') if img.created_at else '-' }}</td>
 
                 <td class="p-3 flex justify-center gap-2">
@@ -54,12 +78,17 @@
                     </a>
 
                     <!-- DELETE -->
-                    <a href="{{ url_for('delete_content', id=img.id) }}"
-                        onclick="return confirm('Yakin hapus konten ini?')">
-                        <button class="p-2 rounded-md bg-red-500 text-white hover:bg-red-600">
+                    <form id="deleteForm-{{ img.id }}" action="{{ url_for('delete_content', id=img.id) }}"
+                        method="POST">
+
+                        <button type="button" onclick="confirmDelete(this)" data-id="{{ img.id }}"
+                            class="p-2 rounded-md bg-red-500 text-white">
                             <i class="fa fa-trash"></i>
                         </button>
-                    </a>
+
+
+                    </form>
+
 
                 </td>
             </tr>

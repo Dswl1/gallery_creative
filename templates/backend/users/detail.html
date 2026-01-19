@@ -10,7 +10,7 @@
     <div class="flex flex-col items-center text-center mb-10">
       <div class="relative">
         <img src="{{ url_for('static', filename='assets/profile.png') }}"
-             class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
+          class="w-36 h-36 rounded-full object-cover ring-4 ring-blue-400/30 shadow-lg">
         <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
       </div>
 
@@ -52,7 +52,7 @@
     <!-- ACTION -->
     <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-end">
 
-      <a href="{{ url_for('update_users') }}">
+      <a href="{{ url_for('admin_edit_user', id=user.id) }}">
         <button class="w-full sm:w-auto px-6 py-3 rounded-xl
                        bg-blue-500 text-white font-semibold
                        hover:bg-blue-600 hover:shadow-lg
@@ -61,12 +61,15 @@
         </button>
       </a>
 
-      <button class="w-full sm:w-auto px-6 py-3 rounded-xl
-                     bg-red-500/10 text-red-600 font-semibold
-                     hover:bg-red-500 hover:text-white
-                     transition">
-        🗑️ Delete Account
-      </button>
+      <form action="{{ url_for('admin_delete_user', id=user.id) }}" method="POST"
+        onsubmit="return confirm('Hapus user ini?')">
+        <button class="w-full sm:w-auto px-6 py-3 rounded-xl
+                 bg-red-500/10 text-red-600 font-semibold
+                 hover:bg-red-500 hover:text-white transition">
+          🗑️ Delete User
+        </button>
+      </form>
+
 
     </div>
 

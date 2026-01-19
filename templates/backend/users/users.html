@@ -1,13 +1,23 @@
 {% extends 'backend/index.html' %}
 {% block content %}
 
-<h2 class="text-2xl font-semibold text-center mb-3">Data Users</h2>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
 
-<div class="flex justify-end">
-    <a href="{{ url_for('create_users') }}"
-       class="bg-blue-500 text-white p-2 mb-2 rounded-md">
+    <div>
+        <h2 class="text-2xl font-extrabold text-gray-800">
+            Data Akun
+        </h2>
+    </div>
+
+    <a href="{{ url_for('create_content') }}" class="mt-4 sm:mt-0 inline-flex items-center gap-2
+            bg-blue-500 px-5 py-2.5 rounded-xl
+            text-white font-semibold
+            hover:bg-blue-600 hover:shadow-lg
+            transition">
+        <i class="fa fa-plus"></i>
         Tambah User
     </a>
+
 </div>
 
 <div class="datatable-container">
@@ -23,7 +33,7 @@
         </thead>
 
         <tbody>
-        {% for user in users %}
+            {% for user in users %}
             <tr>
                 <td class="text-center">{{ loop.index }}</td>
                 <td>{{ user.username }}</td>
@@ -33,30 +43,31 @@
                 <td class="p-3 flex justify-center gap-2">
 
                     <!-- DETAIL -->
-                    <a href="{{ url_for('users_detail', id=user.id) }}">
+                    <a href="{{ url_for('admin_edit_user', id=user.id) }}">
                         <button class="p-2 rounded-md bg-green-500 text-white">
                             <i class="fa fa-eye"></i>
                         </button>
                     </a>
 
                     <!-- EDIT -->
-                    <a href="{{ url_for('update_users', id=user.id) }}">
+                    <a href="{{ url_for('admin_edit_user', id=user.id) }}">
                         <button class="p-2 rounded-md bg-blue-500 text-white">
                             <i class="fa fa-pen"></i>
                         </button>
                     </a>
 
                     <!-- DELETE -->
-                    <a href="{{ url_for('users_delete', id=user.id) }}"
-                        onclick="return confirm('Yakin hapus konten ini?')">
+                    <form action="{{ url_for('admin_delete_user', id=user.id) }}" method="POST"
+                        onsubmit="return confirm('Yakin hapus user ini?')">
                         <button class="p-2 rounded-md bg-red-500 text-white hover:bg-red-600">
                             <i class="fa fa-trash"></i>
                         </button>
-                    </a>
+                    </form>
+
 
                 </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 </div>

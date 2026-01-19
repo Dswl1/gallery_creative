@@ -1,93 +1,104 @@
 {% extends 'backend/index.html' %}
 {% block content %}
 
-<section class="max-w-5xl mx-auto">
+<section class="max-w-7xl mx-auto px-6 py-8">
 
-  <!-- HEADER -->
-  <div class="mb-8 text-center">
-    <span class="inline-block mb-2 px-4 py-1 text-sm font-semibold
-                 rounded-full bg-blue-100 text-blue-700">
-      🖼️ Content Detail
-    </span>
-    <h2 class="text-2xl font-extrabold text-gray-800">
-      Detail Konten
-    </h2>
-    <p class="text-sm text-gray-500 mt-1">
-      Informasi lengkap karya yang diunggah
-    </p>
-  </div>
 
-  <!-- CARD -->
-  <div class="bg-white/70 backdrop-blur-md
-              border border-blue-100
-              rounded-3xl shadow-xl
-              p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
 
-    <!-- IMAGE -->
-    <div class="flex justify-center items-start">
-      <img src="{{ url_for('static', filename='assets/' ~ image.filename) }}"
-           class="rounded-2xl shadow-lg
-                  w-full max-w-md object-cover">
+    <div>
+      <h2 class="text-2xl font-extrabold text-gray-800">
+        {{ image.title }}
+      </h2>
+      <p class="text-sm text-gray-500">
+        Detail & pengelolaan konten
+      </p>
     </div>
 
-    <!-- INFO -->
-    <div class="space-y-4">
+    <div class="flex gap-3">
+      <a href="{{ url_for('dashboard_content') }}"
+        class="px-4 py-2 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 transition text-sm">
+        ← Kembali
+      </a>
+    </div>
 
-      <div class="info-box">
-        <span>Created At</span>
-        <p>{{ image.created_at }}</p>
+  </div>
+
+
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-10">
+
+    <!-- LEFT : IMAGE + META -->
+    <div class="xl:col-span-2 space-y-8">
+
+      <!-- IMAGE -->
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+        <img src="{{ url_for('static', filename='uploads/' ~ image.filename) }}" class="w-full h-[420px] object-cover">
       </div>
 
-      <div class="info-box">
-        <span>Judul Karya</span>
-        <p>{{ image.title }}</p>
-      </div>
-
-      <div class="info-box">
-        <span>Publisher</span>
-        <p>{{ image.username }}</p>
-      </div>
-
-      <div class="info-box">
-        <span>Kategori</span>
-        <p>{{ image.category }}</p>
+      <!-- DESCRIPTION -->
+      <div class="bg-white rounded-3xl shadow p-8">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+          Deskripsi Karya
+        </h3>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          {{ image.description or 'Tidak ada deskripsi' }}
+        </p>
       </div>
 
     </div>
-  </div>
 
-  <!-- DESCRIPTION -->
-  <div class="mt-8 bg-white/70 backdrop-blur-md
-              border border-blue-100
-              rounded-3xl shadow-xl
-              p-8">
+    <!-- RIGHT : INFO PANEL -->
+    <div class="space-y-6">
 
-    <h3 class="text-lg font-semibold text-gray-800 mb-3">
-      Deskripsi Karya
-    </h3>
+      <div class="bg-white rounded-3xl shadow p-6">
+        <h4 class="text-sm font-bold text-gray-400 uppercase mb-4">
+          Informasi
+        </h4>
 
-    <p class="text-gray-700 leading-relaxed text-sm">
-      {{ image.description }}
-    </p>
+        <div class="space-y-4 text-sm">
+          <div>
+            <p class="text-gray-400">Judul</p>
+            <p class="font-semibold">{{ image.title }}</p>
+          </div>
 
-  </div>
+          <div>
+            <p class="text-gray-400">Kategori</p>
+            <p class="font-semibold">{{ image.category }}</p>
+          </div>
 
-  <!-- ACTION -->
-  <div class="mt-10 flex justify-end gap-4">
+          <div>
+            <p class="text-gray-400">Publisher</p>
+            <p class="font-semibold">{{ image.username }}</p>
+          </div>
 
-    <a href="{{ url_for('update_content', id=image.id) }}"
-       class="px-6 py-3 rounded-xl
-              bg-blue-500 text-white
-              hover:bg-blue-600 transition">
-      Edit
-    </a>
+          <div>
+            <p class="text-gray-400">Tanggal Upload</p>
+            <p class="font-semibold">{{ image.created_at }}</p>
+          </div>
+        </div>
+      </div>
 
-    <button onclick="deleteBtn()"
-            class="px-6 py-3 rounded-xl
-                   bg-red-500 text-white
-                   hover:bg-red-600 transition">
-      Delete
-    </button>
+      <!-- ACTION -->
+      <div class="bg-white rounded-3xl shadow p-6 flex flex-col gap-3">
+        <a href="{{ url_for('update_content', id=image.id) }}"
+          class="w-full text-center py-3 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition">
+          Edit Konten
+        </a>
+
+        <form id="deleteForm-{{ image.id }}" action="{{ url_for('delete_content', id=image.id) }}" method="POST">
+
+          <button type="button" onclick="confirmDelete(this)" data-id="{{ image.id }}" class="w-full py-3 rounded-xl
+                 border border-red-500 text-red-500
+                 hover:bg-red-500 hover:text-white transition">
+            Hapus Konten
+          </button>
+
+        </form>
+
+
+      </div>
+
+    </div>
 
   </div>
 

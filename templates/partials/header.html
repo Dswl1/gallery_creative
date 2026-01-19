@@ -32,14 +32,22 @@
             <i class="fa-solid fa-image mr-2 text-black"></i>
             karya
         </a>
-        <a href="{{ url_for('index' ) }}#team"
+        <a href="{{ url_for('index') }}#content" class="relative text-white font-medium flex items-center
+          after:absolute after:-bottom-1 after:left-0
+          after:w-0 after:h-0.5 after:bg-white
+          after:transition-all after:duration-300
+          hover:after:w-full">
+            <i class="fa-solid fa-image mr-2 text-black"></i>
+            karya
+        </a>
+        <a href="{{ url_for('index' ) }}#feedback"
             class="relative text-white font-medium flex items-center
           after:absolute after:-bottom-1 after:left-0
           after:w-0 after:h-0.5 after:bg-white
           after:transition-all after:duration-300
           hover:after:w-full">
-            <i class="fa-solid fa-users mr-2 text-black"></i>
-            Team
+            <i class="fa-solid fa-comment mr-2 text-black"></i>
+            Masukan
         </a>
         {% if 'username' in session %}
         <a href="{{ url_for('dashboard' ) }}"
@@ -92,6 +100,10 @@
             <a href="{{ url_for('index') }}#content" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
                 <i class="fa-solid fa-circle-info"></i>
                 Karya
+            </a>
+            <a href="{{ url_for('index') }}#feedback" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
+                <i class="fa-solid fa-comment"></i>
+                Feedback
             </a>
 
             <a href="#team" class="flex items-center gap-2 text-lg hover:text-sky-200 transition-colors">
